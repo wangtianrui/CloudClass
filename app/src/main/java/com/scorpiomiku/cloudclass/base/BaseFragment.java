@@ -27,9 +27,8 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
-
+        refreshData();
     }
-
 
 
     protected abstract int getLayoutId();

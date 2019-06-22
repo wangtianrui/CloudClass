@@ -25,8 +25,7 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.fab)
-    FloatingActionsMenu fab;
+
     private TextView mTextMessage;
     private BottomNavigationView navigation;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
@@ -83,41 +82,9 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        initFloatButton();
         initFragmentManager();
     }
 
-
-    /**
-     * 初始化悬浮按钮
-     */
-    private void initFloatButton() {
-        new MaterialTapTargetPrompt.Builder(MainActivity.this)
-                .setTarget(R.id.fab)
-                .setPrimaryText("加入课堂按钮")
-                .setSecondaryText("点击这里可以根据老师给予的邀请码加入课堂")
-                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                    @Override
-                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                        if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
-                            // User has pressed the prompt target
-                        }
-                    }
-                })
-                .show();
-
-        FloatingActionButton actionButtonActivate = new FloatingActionButton(getBaseContext());
-        actionButtonActivate.setTitle("实物AR扫描");
-        actionButtonActivate.setIcon(R.drawable.ic_join);
-        actionButtonActivate.setTextDirection(FloatingActionButton.TEXT_DIRECTION_FIRST_STRONG_LTR);
-        actionButtonActivate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MessageUtils.makeToast("加入");
-            }
-        });
-        fab.addButton(actionButtonActivate);
-    }
 
     /**
      * 初始化fragment管理器

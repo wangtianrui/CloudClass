@@ -13,15 +13,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <com.getbase.floatingactionbutton.FloatingActionsMenu
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="5dp">
 
-        </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
     </RelativeLayout>
 
