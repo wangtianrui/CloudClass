@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_class"
+        android:icon="@drawable/ic_cloudclass_choosed"
+        android:title="班课" />
+
+    <item
+        android:id="@+id/navigation_schedule"
+        android:icon="@drawable/ic_schedule_unchoosed"
+        android:title="课程表" />
+
+    <item
+        android:id="@+id/navigation_user"
+        android:icon="@drawable/ic_user_unchoosed"
+        android:title="我的" />
+
+</menu>
