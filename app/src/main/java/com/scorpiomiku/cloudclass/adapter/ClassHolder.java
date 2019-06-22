@@ -42,5 +42,6 @@ public class ClassHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.whole_view)
     public void onViewClicked() {
+
     }
 }
