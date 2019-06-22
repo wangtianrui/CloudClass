@@ -1,16 +1,32 @@
 package com.scorpiomiku.cloudclass.modules.activity;
 
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.scorpiomiku.cloudclass.R;
+import com.scorpiomiku.cloudclass.base.BaseFragment;
+import com.scorpiomiku.cloudclass.modules.fragment.cloudclass.CloudClassHomeFragment;
+import com.scorpiomiku.cloudclass.modules.fragment.schedule.ScheduleHomeFragment;
+import com.scorpiomiku.cloudclass.modules.fragment.user.UserHomeFragment;
+import com.scorpiomiku.cloudclass.utils.MessageUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R.id.fab)
+    FloatingActionsMenu fab;
     private TextView mTextMessage;
     private BottomNavigationView navigation;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
@@ -18,19 +34,27 @@ public class MainActivity extends AppCompatActivity {
     private MenuItem classItem;
     private MenuItem scheduleItem;
     private MenuItem userItem;
+    private FragmentManager fragmentManager;
+
+    private BaseFragment[] fragments = {
+            CloudClassHomeFragment.getInstance(),
+            new ScheduleHomeFragment()
+            , new UserHomeFragment()
+    };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         setTitle("");
         mTextMessage = (TextView) findViewById(R.id.message);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         classItem = navigation.getMenu().findItem(R.id.navigation_class);
         scheduleItem = navigation.getMenu().findItem(R.id.navigation_schedule);
         userItem = navigation.getMenu().findItem(R.id.navigation_user);
-
+        fragmentManager = getSupportFragmentManager();
         mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -40,22 +64,88 @@ public class MainActivity extends AppCompatActivity {
                         classItem.setIcon(R.drawable.ic_cloudclass_choosed);
                         scheduleItem.setIcon(R.drawable.ic_schedule_unchoosed);
                         userItem.setIcon(R.drawable.ic_user_unchoosed);
+                        changeFragment(0);
                         return true;
                     case R.id.navigation_schedule:
                         classItem.setIcon(R.drawable.ic_cloudclass_unchoosed);
                         scheduleItem.setIcon(R.drawable.ic_schedule_choosed);
                         userItem.setIcon(R.drawable.ic_user_unchoosed);
+                        changeFragment(1);
                         return true;
                     case R.id.navigation_user:
                         classItem.setIcon(R.drawable.ic_cloudclass_unchoosed);
                         scheduleItem.setIcon(R.drawable.ic_schedule_unchoosed);
                         userItem.setIcon(R.drawable.ic_user_choosed);
+                        changeFragment(2);
                         return true;
                 }
                 return false;
             }
         };
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        initFloatButton();
+        initFragmentManager();
     }
 
+
+    /**
+     * 初始化悬浮按钮
+     */
+    private void initFloatButton() {
+        new MaterialTapTargetPrompt.Builder(MainActivity.this)
+                .setTarget(R.id.fab)
+                .setPrimaryText("加入课堂按钮")
+                .setSecondaryText("点击这里可以根据老师给予的邀请码加入课堂")
+                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                    @Override
+                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                        if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
+                            // User has pressed the prompt target
+                        }
+                    }
+                })
+                .show();
+
+        FloatingActionButton actionButtonActivate = new FloatingActionButton(getBaseContext());
+        actionButtonActivate.setTitle("实物AR扫描");
+        actionButtonActivate.setIcon(R.drawable.ic_join);
+        actionButtonActivate.setTextDirection(FloatingActionButton.TEXT_DIRECTION_FIRST_STRONG_LTR);
+        actionButtonActivate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MessageUtils.makeToast("加入");
+            }
+        });
+        fab.addButton(actionButtonActivate);
+    }
+
+    /**
+     * 初始化fragment管理器
+     */
+    private void initFragmentManager() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.container, fragments[0]);
+        fragmentTransaction.add(R.id.container, fragments[1]);
+        fragmentTransaction.add(R.id.container, fragments[2]);
+        fragmentTransaction.hide(fragments[1]);
+        fragmentTransaction.hide(fragments[2]);
+        fragmentTransaction.commit();
+    }
+
+    /**
+     * 修改fragment
+     *
+     * @param index
+     */
+    private void changeFragment(int index) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        for (int i = 0; i < fragments.length; i++) {
+            if (i == index) {
+                fragmentTransaction.show(fragments[i]);
+            } else {
+                fragmentTransaction.hide(fragments[i]);
+            }
+        }
+        fragmentTransaction.commit();
+    }
 }

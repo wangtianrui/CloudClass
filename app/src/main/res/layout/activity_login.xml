@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.scorpiomiku.cloudclass.modules.activity.LoginActivity">
-
+    <include layout="@layout/default_bar" />
 
     <ImageView
         android:layout_width="100dp"
