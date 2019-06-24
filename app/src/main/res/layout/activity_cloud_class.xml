@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.scorpiomiku.cloudclass.modules.fragment.cloudclass.CloudClassActivity">
+    tools:context="com.scorpiomiku.cloudclass.modules.activity.cloudclass.CloudClassActivity">
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

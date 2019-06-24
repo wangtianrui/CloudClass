@@ -1,37 +1,91 @@
 package com.scorpiomiku.cloudclass.bean;
 
-import java.util.ArrayList;
-
 /**
  * Created by ScorpioMiku on 2019/6/22.
  */
 
 public class Course {
     private String courseId;
-    private String teacherNumber;
+    private String teacherId;
     private String inviteCode;
     private String courseName;
-    private ArrayList<String> studentList = new ArrayList<>();
-    private ArrayList<String> informList = new ArrayList<>();
-    private ArrayList<String> questionList = new ArrayList<>();
-    private ArrayList<String> homeWorkList = new ArrayList<>();
-    private ArrayList<String> mySourceList = new ArrayList<>();
-    private ArrayList<String> discussionList = new ArrayList<>();
+    private int rowNumber;
+    private int columnNumber;
+    private String classRoomNumber;
+    private int week;
+    private int span;
+    private int startTime;
 
     @Override
     public String toString() {
         return "Course{" +
                 "courseId='" + courseId + '\'' +
-                ", teacherNumber='" + teacherNumber + '\'' +
+                ", teacherId='" + teacherId + '\'' +
                 ", inviteCode='" + inviteCode + '\'' +
                 ", courseName='" + courseName + '\'' +
-                ", studentList=" + studentList +
-                ", informList=" + informList +
-                ", questionList=" + questionList +
-                ", homeWorkList=" + homeWorkList +
-                ", mySourceList=" + mySourceList +
-                ", discussionList=" + discussionList +
+                ", rowNumber=" + rowNumber +
+                ", columnNumber=" + columnNumber +
+                ", classRoomNumber='" + classRoomNumber + '\'' +
+                ", week=" + week +
+                ", span=" + span +
+                ", startTime=" + startTime +
                 '}';
+    }
+
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
+    }
+
+    public int getSpan() {
+        return span;
+    }
+
+    public void setSpan(int span) {
+        this.span = span;
+    }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public int getRowNumber() {
+        return rowNumber;
+    }
+
+    public void setRowNumber(int rowNumber) {
+        this.rowNumber = rowNumber;
+    }
+
+    public int getColumnNumber() {
+        return columnNumber;
+    }
+
+    public void setColumnNumber(int columnNumber) {
+        this.columnNumber = columnNumber;
+    }
+
+    public String getClassRoomNumber() {
+        return classRoomNumber;
+    }
+
+    public void setClassRoomNumber(String classRoomNumber) {
+        this.classRoomNumber = classRoomNumber;
     }
 
     public String getCourseId() {
@@ -43,11 +97,11 @@ public class Course {
     }
 
     public String getTeacherNumber() {
-        return teacherNumber;
+        return teacherId;
     }
 
     public void setTeacherNumber(String teacherNumber) {
-        this.teacherNumber = teacherNumber;
+        this.teacherId = teacherNumber;
     }
 
     public String getInviteCode() {
@@ -66,51 +120,5 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public ArrayList<String> getStudentList() {
-        return studentList;
-    }
 
-    public void setStudentList(ArrayList<String> studentList) {
-        this.studentList = studentList;
-    }
-
-    public ArrayList<String> getInformList() {
-        return informList;
-    }
-
-    public void setInformList(ArrayList<String> informList) {
-        this.informList = informList;
-    }
-
-    public ArrayList<String> getQuestionList() {
-        return questionList;
-    }
-
-    public void setQuestionList(ArrayList<String> questionList) {
-        this.questionList = questionList;
-    }
-
-    public ArrayList<String> getHomeWorkList() {
-        return homeWorkList;
-    }
-
-    public void setHomeWorkList(ArrayList<String> homeWorkList) {
-        this.homeWorkList = homeWorkList;
-    }
-
-    public ArrayList<String> getMySourceList() {
-        return mySourceList;
-    }
-
-    public void setMySourceList(ArrayList<String> mySourceList) {
-        this.mySourceList = mySourceList;
-    }
-
-    public ArrayList<String> getDiscussionList() {
-        return discussionList;
-    }
-
-    public void setDiscussionList(ArrayList<String> discussionList) {
-        this.discussionList = discussionList;
-    }
 }

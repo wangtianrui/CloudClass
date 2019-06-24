@@ -21,7 +21,7 @@
             android:name=".modules.activity.MainActivity"
             android:label="@string/title_activity_main" />
         <activity
-            android:name=".modules.fragment.cloudclass.CloudClassActivity"
+            android:name=".modules.activity.cloudclass.CloudClassActivity"
             android:label="@string/title_activity_cloud_class"></activity>
     </application>
 

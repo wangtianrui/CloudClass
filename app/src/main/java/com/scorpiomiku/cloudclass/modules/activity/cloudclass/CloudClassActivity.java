@@ -1,4 +1,4 @@
-package com.scorpiomiku.cloudclass.modules.fragment.cloudclass;
+package com.scorpiomiku.cloudclass.modules.activity.cloudclass;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
