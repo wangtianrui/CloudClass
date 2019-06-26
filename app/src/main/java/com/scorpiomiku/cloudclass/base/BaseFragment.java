@@ -9,6 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.IOException;
+
+import okhttp3.Response;
+
 /**
  * Created by ScorpioMiku on 2019/6/22.
  */
@@ -43,5 +51,13 @@ public abstract class BaseFragment extends Fragment {
 
     public View getMyView() {
         return myView;
+    }
+
+    protected JsonObject getJsonObj(Response response) throws IOException {
+        String result = response.body().string();
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(result);
+        return jsonObject;
+
     }
 }

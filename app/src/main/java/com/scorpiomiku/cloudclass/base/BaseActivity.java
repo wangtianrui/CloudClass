@@ -6,7 +6,13 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.IOException;
+
 import butterknife.ButterKnife;
+import okhttp3.Response;
 
 /**
  * Created by ScorpioMiku on 2019/6/22.
@@ -31,5 +37,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     abstract public int getLayoutId();
 
     abstract public void refreshData();
+
+    protected JsonObject getJsonObj(Response response) throws IOException {
+        String result = response.body().string();
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(result);
+        return jsonObject;
+
+    }
 
 }
