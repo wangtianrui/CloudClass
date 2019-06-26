@@ -74,6 +74,11 @@ public class CloudClassHomeFragment extends BaseFragment {
     }
 
     @Override
+    protected void initHandle() {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();

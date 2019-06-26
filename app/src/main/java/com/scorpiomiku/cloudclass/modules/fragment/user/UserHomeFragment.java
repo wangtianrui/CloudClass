@@ -9,6 +9,11 @@ import com.scorpiomiku.cloudclass.base.BaseFragment;
 
 public class UserHomeFragment extends BaseFragment {
     @Override
+    protected void initHandle() {
+
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.user_home_fragment_layout;
     }

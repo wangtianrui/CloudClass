@@ -9,6 +9,11 @@ import com.scorpiomiku.cloudclass.base.BaseFragment;
 
 public class ScheduleHomeFragment extends BaseFragment {
     @Override
+    protected void initHandle() {
+
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.schedule_home_fragment_layout;
     }

@@ -44,6 +44,11 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
+    protected void initHandle() {
+
+    }
+
+    @Override
     public void iniview() {
         setTitle("");
     }

@@ -1,5 +1,7 @@
 package com.scorpiomiku.cloudclass.utils;
 
+import com.scorpiomiku.cloudclass.bean.User;
+
 import java.util.HashMap;
 import java.util.Set;
 
@@ -31,16 +33,32 @@ public class WebUtils {
      * @param callback
      */
     public static void rigester(HashMap<String, String> data, Callback callback) {
-        FormBody.Builder bodyBuilder = new FormBody.Builder();
-        Set<String> keys = data.keySet();
-        for (String key : keys) {
-            bodyBuilder.add(key, data.get(key));
-        }
-        Request request = new Request.Builder().post(bodyBuilder.build())
+        Request request = new Request.Builder().post(getBody(data))
                 .url(ConstantUtils.webHost + "register/").build();
         Call call = mClient.newCall(request);
         call.enqueue(callback);
     }
 
+    /**
+     * 登录
+     *
+     * @param data
+     * @param callback
+     * @return
+     */
+    public static void login(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "login/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
 
+    public static FormBody getBody(HashMap<String, String> data) {
+        FormBody.Builder bodyBuilder = new FormBody.Builder();
+        Set<String> keys = data.keySet();
+        for (String key : keys) {
+            bodyBuilder.add(key, data.get(key));
+        }
+        return bodyBuilder.build();
+    }
 }
