@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.base.BaseActivity;
 import com.scorpiomiku.cloudclass.bean.User;
@@ -68,6 +69,7 @@ public class LoginActivity extends BaseActivity {
                         Gson gson = new Gson();
                         JsonObject jsonObject = getJsonObj(response);
                         User user = gson.fromJson(jsonObject.get("values"), User.class);
+                        CloudClass.user = user;
                         Log.d(TAG, "onResponse: login ok" + user);
                         handler.sendEmptyMessage(jsonObject.get("result").getAsInt());
                     }

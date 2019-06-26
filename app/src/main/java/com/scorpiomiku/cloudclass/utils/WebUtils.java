@@ -53,6 +53,19 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 添加个人信息
+     *
+     * @param data
+     * @param callback
+     */
+    public static void addInformation(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "complete_information/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         Set<String> keys = data.keySet();
