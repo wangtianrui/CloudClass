@@ -1,5 +1,7 @@
 package com.scorpiomiku.cloudclass.modules.fragment.schedule;
 
+import android.os.Handler;
+
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.base.BaseFragment;
 
@@ -9,8 +11,8 @@ import com.scorpiomiku.cloudclass.base.BaseFragment;
 
 public class ScheduleHomeFragment extends BaseFragment {
     @Override
-    protected void initHandle() {
-
+    protected Handler initHandle() {
+        return null;
     }
 
     @Override

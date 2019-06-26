@@ -1,6 +1,7 @@
 package com.scorpiomiku.cloudclass.base;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +13,18 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
+    protected Handler handler;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
         iniview();
-        initHandle();
+        handler = initHandle();
     }
 
-    protected abstract void initHandle();
+    protected abstract Handler initHandle();
 
     abstract public void iniview();
 

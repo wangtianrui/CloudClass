@@ -1,5 +1,7 @@
 package com.scorpiomiku.cloudclass.modules.fragment.user;
 
+import android.os.Handler;
+
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.base.BaseFragment;
 
@@ -9,8 +11,8 @@ import com.scorpiomiku.cloudclass.base.BaseFragment;
 
 public class UserHomeFragment extends BaseFragment {
     @Override
-    protected void initHandle() {
-
+    protected Handler initHandle() {
+        return null;
     }
 
     @Override

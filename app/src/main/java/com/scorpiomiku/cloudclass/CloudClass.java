@@ -2,12 +2,15 @@ package com.scorpiomiku.cloudclass;
 
 import android.app.Application;
 
+import com.scorpiomiku.cloudclass.bean.User;
+
 /**
  * Created by ScorpioMiku on 2019/6/22.
  */
 
 public class CloudClass extends Application {
     public static CloudClass mInstance;
+    public static User user;
 
     @Override
     public void onCreate() {

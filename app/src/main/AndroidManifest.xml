@@ -3,6 +3,7 @@
     package="com.scorpiomiku.cloudclass">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".CloudClass"
         android:allowBackup="true"
@@ -24,6 +25,7 @@
         <activity
             android:name=".modules.activity.cloudclass.CloudClassActivity"
             android:label="@string/title_activity_cloud_class" />
+        <activity android:name=".modules.activity.RegisterActivity"></activity>
     </application>
 
 </manifest>

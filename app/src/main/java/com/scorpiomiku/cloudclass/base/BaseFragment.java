@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
     private View myView;
+    protected Handler handler;
 
     @Nullable
     @Override
@@ -27,11 +28,11 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
-        initHandle();
+        handler = initHandle();
         refreshData();
     }
 
-    protected abstract void initHandle();
+    protected abstract Handler initHandle();
 
 
     protected abstract int getLayoutId();

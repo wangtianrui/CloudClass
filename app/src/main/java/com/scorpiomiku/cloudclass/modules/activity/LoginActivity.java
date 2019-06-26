@@ -2,6 +2,7 @@ package com.scorpiomiku.cloudclass.modules.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +38,8 @@ public class LoginActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.linear_layout_btn_register:
+                Intent intent1 = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.login_find_pwd:
                 break;
@@ -44,8 +47,8 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
-    protected void initHandle() {
-
+    protected Handler initHandle() {
+        return null;
     }
 
     @Override

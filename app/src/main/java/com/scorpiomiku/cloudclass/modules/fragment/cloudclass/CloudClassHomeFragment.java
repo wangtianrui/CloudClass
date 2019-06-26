@@ -1,6 +1,7 @@
 package com.scorpiomiku.cloudclass.modules.fragment.cloudclass;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -74,8 +75,8 @@ public class CloudClassHomeFragment extends BaseFragment {
     }
 
     @Override
-    protected void initHandle() {
-
+    protected Handler initHandle() {
+        return null;
     }
 
     @Override
