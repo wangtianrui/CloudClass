@@ -35,9 +35,9 @@ public class ClassHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindView(Course course) {
-        className.setText(course.getCourseName());
+        className.setText(course.getName());
         teacherName.setText(course.getTeacherNumber());
-        inviteCodeTextView.setText(course.getInviteCode());
+        inviteCodeTextView.setText(course.getInvite_code());
     }
 
     @OnClick(R.id.whole_view)

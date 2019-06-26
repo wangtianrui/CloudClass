@@ -5,37 +5,37 @@ package com.scorpiomiku.cloudclass.bean;
  */
 
 public class MySource {
-    private String sourceId;
-    private String classId;
+    private String source_path;
+    private String course_id;
     private int type;
-    private String upperId;
-    private int downloadTime;
+    private String uper_id;
+    private int download_count;
 
     @Override
     public String toString() {
         return "MySource{" +
-                "sourceId='" + sourceId + '\'' +
-                ", classId='" + classId + '\'' +
+                "source_path='" + source_path + '\'' +
+                ", course_id='" + course_id + '\'' +
                 ", type=" + type +
-                ", upperId='" + upperId + '\'' +
-                ", downloadTime=" + downloadTime +
+                ", uper_id='" + uper_id + '\'' +
+                ", download_count=" + download_count +
                 '}';
     }
 
-    public String getSourceId() {
-        return sourceId;
+    public String getSource_path() {
+        return source_path;
     }
 
-    public void setSourceId(String sourceId) {
-        this.sourceId = sourceId;
+    public void setSource_path(String source_path) {
+        this.source_path = source_path;
     }
 
-    public String getClassId() {
-        return classId;
+    public String getCourse_id() {
+        return course_id;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
+    public void setCourse_id(String course_id) {
+        this.course_id = course_id;
     }
 
     public int getType() {
@@ -46,19 +46,19 @@ public class MySource {
         this.type = type;
     }
 
-    public String getUpperId() {
-        return upperId;
+    public String getUper_id() {
+        return uper_id;
     }
 
-    public void setUpperId(String upperId) {
-        this.upperId = upperId;
+    public void setUper_id(String uper_id) {
+        this.uper_id = uper_id;
     }
 
-    public int getDownloadTime() {
-        return downloadTime;
+    public int getDownload_count() {
+        return download_count;
     }
 
-    public void setDownloadTime(int downloadTime) {
-        this.downloadTime = downloadTime;
+    public void setDownload_count(int download_count) {
+        this.download_count = download_count;
     }
 }

@@ -5,30 +5,31 @@ package com.scorpiomiku.cloudclass.bean;
  */
 
 public class Student2Class {
-    private String studentId;
-    private String classId;
+    private String id;
+    private String student_id;
+    private String course_id;
 
-    public String getStudentId() {
-        return studentId;
+    public String getStudent_id() {
+        return student_id;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setStudent_id(String student_id) {
+        this.student_id = student_id;
     }
 
-    public String getClassId() {
-        return classId;
+    public String getCourse_id() {
+        return course_id;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
+    public void setCourse_id(String course_id) {
+        this.course_id = course_id;
     }
 
     @Override
     public String toString() {
         return "Student2Class{" +
-                "studentId='" + studentId + '\'' +
-                ", classId='" + classId + '\'' +
+                "student_id='" + student_id + '\'' +
+                ", course_id='" + course_id + '\'' +
                 '}';
     }
 }

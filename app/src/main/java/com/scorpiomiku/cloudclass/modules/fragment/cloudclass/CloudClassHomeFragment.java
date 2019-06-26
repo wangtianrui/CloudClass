@@ -49,8 +49,8 @@ public class CloudClassHomeFragment extends BaseFragment {
     protected void refreshData() {
         mlist.clear();
         Course course = new Course();
-        course.setCourseName("Android");
-        course.setInviteCode("1534");
+        course.setName("Android");
+        course.setInvite_code("1534");
         course.setTeacherNumber("于一");
         mlist.add(course);
         adapter.notifyDataSetChanged();

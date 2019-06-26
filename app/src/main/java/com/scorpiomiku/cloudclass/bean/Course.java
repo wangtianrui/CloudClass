@@ -5,32 +5,17 @@ package com.scorpiomiku.cloudclass.bean;
  */
 
 public class Course {
-    private String courseId;
-    private String teacherId;
-    private String inviteCode;
-    private String courseName;
-    private int rowNumber;
-    private int columnNumber;
-    private String classRoomNumber;
+    private String course_id;
+    private String creator_id;
+    private String invite_code;
+    private String name;
+    private int row_number;
+    private int column_number;
+    private String class_room_number;
     private int week;
     private int span;
-    private int startTime;
+    private int section;
 
-    @Override
-    public String toString() {
-        return "Course{" +
-                "courseId='" + courseId + '\'' +
-                ", teacherId='" + teacherId + '\'' +
-                ", inviteCode='" + inviteCode + '\'' +
-                ", courseName='" + courseName + '\'' +
-                ", rowNumber=" + rowNumber +
-                ", columnNumber=" + columnNumber +
-                ", classRoomNumber='" + classRoomNumber + '\'' +
-                ", week=" + week +
-                ", span=" + span +
-                ", startTime=" + startTime +
-                '}';
-    }
 
     public int getWeek() {
         return week;
@@ -49,75 +34,75 @@ public class Course {
     }
 
     public int getStartTime() {
-        return startTime;
+        return section;
     }
 
     public void setStartTime(int startTime) {
-        this.startTime = startTime;
+        this.section = startTime;
     }
 
-    public String getTeacherId() {
-        return teacherId;
+    public String getCreator_id() {
+        return creator_id;
     }
 
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
+    public void setCreator_id(String creator_id) {
+        this.creator_id = creator_id;
     }
 
-    public int getRowNumber() {
-        return rowNumber;
+    public int getRow_number() {
+        return row_number;
     }
 
-    public void setRowNumber(int rowNumber) {
-        this.rowNumber = rowNumber;
+    public void setRow_number(int row_number) {
+        this.row_number = row_number;
     }
 
-    public int getColumnNumber() {
-        return columnNumber;
+    public int getColumn_number() {
+        return column_number;
     }
 
-    public void setColumnNumber(int columnNumber) {
-        this.columnNumber = columnNumber;
+    public void setColumn_number(int column_number) {
+        this.column_number = column_number;
     }
 
-    public String getClassRoomNumber() {
-        return classRoomNumber;
+    public String getClass_room_number() {
+        return class_room_number;
     }
 
-    public void setClassRoomNumber(String classRoomNumber) {
-        this.classRoomNumber = classRoomNumber;
+    public void setClass_room_number(String class_room_number) {
+        this.class_room_number = class_room_number;
     }
 
-    public String getCourseId() {
-        return courseId;
+    public String getCourse_id() {
+        return course_id;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public void setCourse_id(String course_id) {
+        this.course_id = course_id;
     }
 
     public String getTeacherNumber() {
-        return teacherId;
+        return creator_id;
     }
 
     public void setTeacherNumber(String teacherNumber) {
-        this.teacherId = teacherNumber;
+        this.creator_id = teacherNumber;
     }
 
-    public String getInviteCode() {
-        return inviteCode;
+    public String getInvite_code() {
+        return invite_code;
     }
 
-    public void setInviteCode(String inviteCode) {
-        this.inviteCode = inviteCode;
+    public void setInvite_code(String invite_code) {
+        this.invite_code = invite_code;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getName() {
+        return name;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setName(String name) {
+        this.name = name;
     }
 
 
