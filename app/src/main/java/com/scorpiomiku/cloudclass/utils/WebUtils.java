@@ -2,14 +2,19 @@ package com.scorpiomiku.cloudclass.utils;
 
 import com.scorpiomiku.cloudclass.bean.User;
 
+import java.io.File;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Set;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 /**
  * Created by ScorpioMiku on 2019/6/24.
@@ -115,6 +120,37 @@ public class WebUtils {
     public static void joinCourseByInvited(HashMap<String, String> data, Callback callback) {
         Request request = new Request.Builder().post(getBody(data))
                 .url(ConstantUtils.webHost + "join_course/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 上传文件
+     *
+     * @param courseId
+     * @param uperId
+     * @param type
+     * @param path
+     * @param source
+     * @param callback
+     */
+    public static void upSource(String courseId, String uperId, String type, String path,
+                                File source, Callback callback) {
+        MediaType mediaType = MediaType.parse("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW");
+
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("courseId", courseId)
+                .addFormDataPart("uperId", uperId)
+                .addFormDataPart("type", type)
+                .addFormDataPart("sourceName", path)
+                .addFormDataPart("source",
+                        String.valueOf(new Random().nextInt()) + "." + path.split("\\.")[1],
+                        RequestBody.create(mediaType, source)
+                )
+                .build();
+        Request request = new Request.Builder().post(requestBody).url(ConstantUtils.webHost +
+                "add_source/").build();
         Call call = mClient.newCall(request);
         call.enqueue(callback);
     }

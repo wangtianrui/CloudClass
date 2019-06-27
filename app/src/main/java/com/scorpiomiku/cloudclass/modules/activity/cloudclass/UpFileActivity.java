@@ -1,5 +1,6 @@
 package com.scorpiomiku.cloudclass.modules.activity.cloudclass;
 
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
@@ -18,15 +20,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.base.BaseActivity;
 import com.scorpiomiku.cloudclass.utils.MessageUtils;
+import com.scorpiomiku.cloudclass.utils.WebUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class UpFileActivity extends BaseActivity {
 
@@ -48,7 +57,25 @@ public class UpFileActivity extends BaseActivity {
 
     @Override
     protected Handler initHandle() {
-        return null;
+        @SuppressLint("HandlerLeak") Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                cover.setVisibility(View.INVISIBLE);
+                switch (msg.what) {
+                    case 1:
+                        finish();
+                        MessageUtils.makeToast("上传成功");
+                        break;
+                    case 0:
+                        MessageUtils.makeToast("上传失败");
+                        break;
+                    case -1:
+                        break;
+                }
+            }
+        };
+        return handler;
     }
 
     @Override
@@ -91,6 +118,39 @@ public class UpFileActivity extends BaseActivity {
                 startActivityForResult(intent, 1);
                 break;
             case R.id.up_button:
+                cover.setVisibility(View.VISIBLE);
+                int type;
+                if (upFileName.endsWith("ppt") || upFileName.endsWith("pptx")) {
+                    type = 0;
+                } else if (upFileName.endsWith("doc") || upFileName.endsWith("docx")) {
+                    type = 1;
+                } else if (upFileName.endsWith("xls") || upFileName.endsWith("xlsx")) {
+                    type = 2;
+                } else if (upFileName.endsWith("pdf")) {
+                    type = 3;
+                } else if (upFileName.endsWith("txt")) {
+                    type = 4;
+                } else {
+                    type = -1;
+                }
+                WebUtils.upSource(
+                        CloudClass.course.getCourse_id(),
+                        CloudClass.user.getPhone(),
+                        String.valueOf(type),
+                        upFileName,
+                        originFile,
+                        new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                JsonObject jsonObject = getJsonObj(response);
+                                handler.sendEmptyMessage(jsonObject.get("result").getAsInt());
+                            }
+                        });
                 break;
         }
     }

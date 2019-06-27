@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.base.BaseFragment;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.UpFileActivity;
+import com.scorpiomiku.cloudclass.utils.MessageUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,8 +81,12 @@ public class MainFragment extends BaseFragment {
             case R.id.home_work_button:
                 break;
             case R.id.up_button:
-                Intent upIntent = new Intent(getContext(), UpFileActivity.class);
-                startActivity(upIntent);
+                if (CloudClass.user.getType() == 1) {
+                    Intent upIntent = new Intent(getContext(), UpFileActivity.class);
+                    startActivity(upIntent);
+                } else {
+                    MessageUtils.makeToast("只有老师才能上传资料");
+                }
                 break;
             case R.id.sign_button:
                 break;
