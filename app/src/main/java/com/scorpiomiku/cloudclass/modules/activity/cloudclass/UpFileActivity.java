@@ -136,6 +136,7 @@ public class UpFileActivity extends BaseActivity {
                 WebUtils.upSource(
                         CloudClass.course.getCourse_id(),
                         CloudClass.user.getPhone(),
+                        CloudClass.user.getName(),
                         String.valueOf(type),
                         upFileName,
                         originFile,

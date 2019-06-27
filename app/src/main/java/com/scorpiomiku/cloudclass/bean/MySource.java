@@ -10,6 +10,8 @@ public class MySource {
     private int type;
     private String uper_id;
     private int download_count;
+    private String source_name;
+    private String uper_name;
 
     @Override
     public String toString() {
@@ -19,7 +21,25 @@ public class MySource {
                 ", type=" + type +
                 ", uper_id='" + uper_id + '\'' +
                 ", download_count=" + download_count +
+                ", source_name='" + source_name + '\'' +
+                ", uper_name='" + uper_name + '\'' +
                 '}';
+    }
+
+    public String getUper_name() {
+        return uper_name;
+    }
+
+    public void setUper_name(String uper_name) {
+        this.uper_name = uper_name;
+    }
+
+    public String getSource_name() {
+        return source_name;
+    }
+
+    public void setSource_name(String source_name) {
+        this.source_name = source_name;
     }
 
     public String getSource_path() {

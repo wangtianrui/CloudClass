@@ -134,7 +134,7 @@ public class WebUtils {
      * @param source
      * @param callback
      */
-    public static void upSource(String courseId, String uperId, String type, String path,
+    public static void upSource(String courseId, String uperId, String uperName, String type, String path,
                                 File source, Callback callback) {
         MediaType mediaType = MediaType.parse("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW");
 
@@ -144,6 +144,7 @@ public class WebUtils {
                 .addFormDataPart("uperId", uperId)
                 .addFormDataPart("type", type)
                 .addFormDataPart("sourceName", path)
+                .addFormDataPart("uperName", uperName)
                 .addFormDataPart("source",
                         String.valueOf(new Random().nextInt()) + "." + path.split("\\.")[1],
                         RequestBody.create(mediaType, source)
@@ -151,6 +152,19 @@ public class WebUtils {
                 .build();
         Request request = new Request.Builder().post(requestBody).url(ConstantUtils.webHost +
                 "add_source/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 获取资源
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getSource(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "get_source/").build();
         Call call = mClient.newCall(request);
         call.enqueue(callback);
     }
