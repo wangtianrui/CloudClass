@@ -3,6 +3,9 @@ package com.scorpiomiku.cloudclass.modules.activity.cloudclass;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -10,6 +13,10 @@ import android.widget.TextView;
 
 import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
+import com.scorpiomiku.cloudclass.modules.fragment.cloudclass.InformFragment;
+import com.scorpiomiku.cloudclass.modules.fragment.cloudclass.MainFragment;
+import com.scorpiomiku.cloudclass.modules.fragment.cloudclass.MemberListFragment;
+import com.scorpiomiku.cloudclass.modules.fragment.cloudclass.SeatFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +32,13 @@ public class CloudClassActivity extends AppCompatActivity {
     private MenuItem listItem;
     private MenuItem seatItem;
     private MenuItem informItem;
+    private FragmentManager fragmentManager;
+    private Fragment[] fragments = {
+            new MainFragment(),
+            new MemberListFragment(),
+            new SeatFragment(),
+            new InformFragment()
+    };
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -36,24 +50,28 @@ public class CloudClassActivity extends AppCompatActivity {
                     listItem.setIcon(R.drawable.ic_list_gray);
                     seatItem.setIcon(R.drawable.ic_nav_seat_gray);
                     informItem.setIcon(R.drawable.ic_inform_gray);
+                    changeFragment(0);
                     return true;
                 case R.id.navigation_member:
                     mainItem.setIcon(R.drawable.ic_main_gray);
                     listItem.setIcon(R.drawable.ic_list_green);
                     seatItem.setIcon(R.drawable.ic_nav_seat_gray);
                     informItem.setIcon(R.drawable.ic_inform_gray);
+                    changeFragment(1);
                     return true;
                 case R.id.navigation_seat:
                     mainItem.setIcon(R.drawable.ic_main_gray);
                     listItem.setIcon(R.drawable.ic_list_gray);
                     seatItem.setIcon(R.drawable.ic_nav_seat_green);
                     informItem.setIcon(R.drawable.ic_inform_gray);
+                    changeFragment(2);
                     return true;
                 case R.id.navigation_inform:
                     mainItem.setIcon(R.drawable.ic_main_gray);
                     listItem.setIcon(R.drawable.ic_list_gray);
                     seatItem.setIcon(R.drawable.ic_nav_seat_gray);
                     informItem.setIcon(R.drawable.ic_inform_green);
+                    changeFragment(3);
                     return true;
             }
             return false;
@@ -74,6 +92,8 @@ public class CloudClassActivity extends AppCompatActivity {
         listItem = navigation.getMenu().findItem(R.id.navigation_member);
         seatItem = navigation.getMenu().findItem(R.id.navigation_seat);
         informItem = navigation.getMenu().findItem(R.id.navigation_inform);
+        fragmentManager = getSupportFragmentManager();
+        initFragmentManager();
     }
 
     @OnClick(R.id.back_button)
@@ -81,7 +101,36 @@ public class CloudClassActivity extends AppCompatActivity {
         finish();
     }
 
-    private void changeFragment() {
-
+    /**
+     * 初始化fragment管理器
+     */
+    private void initFragmentManager() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.container, fragments[0]);
+        fragmentTransaction.add(R.id.container, fragments[1]);
+        fragmentTransaction.add(R.id.container, fragments[2]);
+        fragmentTransaction.add(R.id.container, fragments[3]);
+        fragmentTransaction.hide(fragments[1]);
+        fragmentTransaction.hide(fragments[2]);
+        fragmentTransaction.hide(fragments[3]);
+        fragmentTransaction.commit();
     }
+
+    /**
+     * 修改fragment
+     *
+     * @param index
+     */
+    private void changeFragment(int index) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        for (int i = 0; i < fragments.length; i++) {
+            if (i == index) {
+                fragmentTransaction.show(fragments[i]);
+            } else {
+                fragmentTransaction.hide(fragments[i]);
+            }
+        }
+        fragmentTransaction.commit();
+    }
+
 }
