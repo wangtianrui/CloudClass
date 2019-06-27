@@ -3,6 +3,13 @@
     package="com.scorpiomiku.cloudclass">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:name=".CloudClass"
@@ -25,7 +32,9 @@
         <activity
             android:name=".modules.activity.cloudclass.CloudClassActivity"
             android:label="@string/title_activity_cloud_class" />
-        <activity android:name=".modules.activity.RegisterActivity"></activity>
+        <activity android:name=".modules.activity.RegisterActivity" />
+        <activity android:name=".modules.activity.cloudclass.CreateCourseActivity" />
+        <activity android:name=".modules.activity.cloudclass.AddCourseDetialActivity" />
     </application>
 
 </manifest>

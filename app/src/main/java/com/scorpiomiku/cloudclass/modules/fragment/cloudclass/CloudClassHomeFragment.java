@@ -1,5 +1,6 @@
 package com.scorpiomiku.cloudclass.modules.fragment.cloudclass;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,10 +11,12 @@ import android.view.ViewGroup;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.adapter.ClassAdapter;
 import com.scorpiomiku.cloudclass.base.BaseFragment;
 import com.scorpiomiku.cloudclass.bean.Course;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.CreateCourseActivity;
 import com.scorpiomiku.cloudclass.utils.MessageUtils;
 
 import java.util.ArrayList;
@@ -89,10 +92,16 @@ public class CloudClassHomeFragment extends BaseFragment {
      * 初始化悬浮按钮
      */
     private void initFloatButton() {
+        String message = "";
+        if (CloudClass.user.getType() == 1) {
+            message = "点击这里可以创建新的课堂";
+        } else {
+            message = "点击这里可以根据老师给予的邀请码加入课堂";
+        }
         new MaterialTapTargetPrompt.Builder(getActivity())
                 .setTarget(R.id.fab)
-                .setPrimaryText("加入课堂按钮")
-                .setSecondaryText("点击这里可以根据老师给予的邀请码加入课堂")
+                .setPrimaryText("课堂操作按钮")
+                .setSecondaryText(message)
                 .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                     @Override
                     public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
@@ -109,7 +118,10 @@ public class CloudClassHomeFragment extends BaseFragment {
         actionButtonActivate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MessageUtils.makeToast("加入");
+                if (CloudClass.user.getType() == 1) {
+                    Intent intent = new Intent(getActivity(), CreateCourseActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         fab.addButton(actionButtonActivate);
