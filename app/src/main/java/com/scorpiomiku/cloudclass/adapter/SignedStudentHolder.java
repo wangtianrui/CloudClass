@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.bean.User;
+import com.scorpiomiku.cloudclass.utils.ConstantUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +34,7 @@ public class SignedStudentHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindView(User user) {
-        Glide.with(view.getContext()).load(user.getAvatar()).into(avatar);
+        Glide.with(view.getContext()).load(ConstantUtils.mediaHost + user.getAvatar()).into(avatar);
         name.setText(user.getName());
         idCard.setText(user.getId_card());
     }

@@ -1,10 +1,12 @@
 package com.scorpiomiku.cloudclass.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by ScorpioMiku on 2019/6/24.
  */
 
-public class User {
+public class User implements Serializable{
     private String phone;
     private String name;
     private String sex;

@@ -49,7 +49,8 @@
 
         <activity android:name=".modules.activity.cloudclass.SignRecordActivity" />
         <activity android:name=".modules.activity.cloudclass.SignMemberListActivity" />
-        <activity android:name=".modules.activity.cloudclass.AddInformActivity"></activity>
+        <activity android:name=".modules.activity.cloudclass.AddInformActivity" />
+        <activity android:name=".modules.activity.cloudclass.StudentDetailActivity"></activity>
     </application>
 
 </manifest>
