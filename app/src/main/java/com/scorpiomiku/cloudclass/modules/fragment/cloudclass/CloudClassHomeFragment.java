@@ -1,6 +1,8 @@
 package com.scorpiomiku.cloudclass.modules.fragment.cloudclass;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -111,7 +114,12 @@ public class CloudClassHomeFragment extends BaseFragment {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 switch (msg.what) {
-
+                    case 1056:
+                        refreshData();
+                        break;
+                    case 1000:
+                        MessageUtils.makeToast("邀请码错误");
+                        break;
                     case 0:
                         MessageUtils.makeToast("查无课程");
                         break;
@@ -163,6 +171,41 @@ public class CloudClassHomeFragment extends BaseFragment {
                 if (CloudClass.user.getType() == 1) {
                     Intent intent = new Intent(getActivity(), CreateCourseActivity.class);
                     startActivity(intent);
+                } else {
+                    final EditText inputServer = new EditText(getContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("输入邀请码").setIcon(R.drawable.ic_search).setView(inputServer)
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            String text = inputServer.getText().toString();
+                            HashMap<String, String> data = new HashMap<>();
+                            data.put("inviteCode", text);
+                            data.put("studentId", CloudClass.user.getPhone());
+                            WebUtils.joinCourseByInvited(data, new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+
+                                }
+
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+                                    JsonObject jsonObject = getJsonObj(response);
+                                    if (jsonObject.get("result").getAsInt() > 0) {
+                                        handler.sendEmptyMessage(1056);
+                                    } else {
+                                        handler.sendEmptyMessage(1000);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                    builder.show();
                 }
             }
         });

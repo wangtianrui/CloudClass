@@ -94,13 +94,27 @@ public class WebUtils {
     }
 
     /**
-     * 加入课堂
+     * 加入课堂（老师创建课堂时调用）
+     *
      * @param data
      * @param callback
      */
     public static void joinCourse(HashMap<String, String> data, Callback callback) {
         Request request = new Request.Builder().post(getBody(data))
                 .url(ConstantUtils.webHost + "joinCourse/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 学生加入课堂
+     *
+     * @param data
+     * @param callback
+     */
+    public static void joinCourseByInvited(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "join_course/").build();
         Call call = mClient.newCall(request);
         call.enqueue(callback);
     }
