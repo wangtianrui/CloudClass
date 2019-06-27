@@ -2,6 +2,7 @@ package com.scorpiomiku.cloudclass;
 
 import android.app.Application;
 
+import com.scorpiomiku.cloudclass.bean.Course;
 import com.scorpiomiku.cloudclass.bean.User;
 
 /**
@@ -11,6 +12,7 @@ import com.scorpiomiku.cloudclass.bean.User;
 public class CloudClass extends Application {
     public static CloudClass mInstance;
     public static User user;
+    public static Course course;
 
     @Override
     public void onCreate() {

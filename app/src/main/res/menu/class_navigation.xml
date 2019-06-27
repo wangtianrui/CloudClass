@@ -2,22 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_source"
-        android:icon="@drawable/ic_cloudclass_choosed"
-        android:title="班课" />
+        android:id="@+id/navigation_main"
+        android:icon="@drawable/ic_main_green"
+        android:title="主要功能" />
 
     <item
         android:id="@+id/navigation_member"
-        android:icon="@drawable/ic_schedule_unchoosed"
-        android:title="课程表" />
+        android:icon="@drawable/ic_list_gray"
+        android:title="成员名单" />
 
     <item
         android:id="@+id/navigation_seat"
-        android:icon="@drawable/ic_user_unchoosed"
-        android:title="我的" />
+        android:icon="@drawable/ic_nav_seat_gray"
+        android:title="座位" />
+
     <item
         android:id="@+id/navigation_inform"
-        android:icon="@drawable/ic_user_unchoosed"
-        android:title="我的" />
+        android:icon="@drawable/ic_inform_gray"
+        android:title="通知" />
 
 </menu>
