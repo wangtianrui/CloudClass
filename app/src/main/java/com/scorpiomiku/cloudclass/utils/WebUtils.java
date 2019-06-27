@@ -208,6 +208,19 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 获取签到了的学生
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getSignedStudent(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "getSignedStudent/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
 
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();

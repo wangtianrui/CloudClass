@@ -127,7 +127,7 @@ public class SignRecordActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back_button:
-                fileList();
+                finish();
                 break;
             case R.id.fab_add:
                 showTeacherDialog();
@@ -142,6 +142,9 @@ public class SignRecordActivity extends BaseActivity {
     }
 
 
+    /**
+     * 发起签到dialog
+     */
     private void showTeacherDialog() {
         /* @setIcon 设置对话框图标
          * @setTitle 设置对话框标题

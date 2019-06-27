@@ -47,7 +47,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".modules.activity.cloudclass.SignRecordActivity"></activity>
+        <activity android:name=".modules.activity.cloudclass.SignRecordActivity" />
+        <activity android:name=".modules.activity.cloudclass.SignMemberListActivity"></activity>
     </application>
 
 </manifest>

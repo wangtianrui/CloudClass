@@ -1,5 +1,6 @@
 package com.scorpiomiku.cloudclass.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.bean.Sign;
 import com.scorpiomiku.cloudclass.bean.StudentSign;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.SignMemberListActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +41,9 @@ public class SignRecordHolder extends RecyclerView.ViewHolder {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(view.getContext(), SignMemberListActivity.class);
+                view.getContext().startActivity(intent);
+                CloudClass.signCode = studentSign.getSign_code();
             }
         });
     }

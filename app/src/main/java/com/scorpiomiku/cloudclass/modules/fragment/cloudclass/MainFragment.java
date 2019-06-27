@@ -1,6 +1,8 @@
 package com.scorpiomiku.cloudclass.modules.fragment.cloudclass;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
@@ -28,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,7 +74,16 @@ public class MainFragment extends BaseFragment {
                 switch (msg.what) {
                     case 0:
                         break;
+                    case 1002:
+                        MessageUtils.makeToast("签到码错误");
+                        break;
                     case -1:
+                        break;
+                    case 1000:
+                        MessageUtils.makeToast("签到成功");
+                        break;
+                    case 1001:
+                        MessageUtils.makeToast("你已签到过，不可重复签到");
                         break;
                     default:
                         adapter.notifyDataSetChanged();
@@ -150,6 +163,8 @@ public class MainFragment extends BaseFragment {
                 if (CloudClass.user.getType() == 1) {
                     Intent intent = new Intent(getContext(), SignRecordActivity.class);
                     startActivity(intent);
+                } else {
+                    showInputDialog();
                 }
                 break;
             case R.id.communication_button:
@@ -163,5 +178,45 @@ public class MainFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         refreshData();
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private void showInputDialog() {
+    /*@setView 装入一个EditView
+     */
+        final EditText editText = new EditText(getContext());
+        editText.setTextColor(R.color.black);
+        AlertDialog.Builder inputDialog =
+                new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
+        inputDialog.setTitle("请输入签到码\n\n").setView(editText);
+        inputDialog.setPositiveButton("签到",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String code = editText.getText().toString().trim();
+                        HashMap<String, String> data = new HashMap<>();
+                        data.put("signCode", code);
+                        data.put("studentId", CloudClass.user.getPhone());
+                        WebUtils.studentSign(data, new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                JsonObject jsonObject = getJsonObj(response);
+                                int result = jsonObject.get("result").getAsInt();
+                                if (result == 0) {
+                                    handler.sendEmptyMessage(1001);
+                                } else if (result == 1) {
+                                    handler.sendEmptyMessage(1000);
+                                } else {
+                                    handler.sendEmptyMessage(1002);
+                                }
+                            }
+                        });
+                    }
+                }).show();
     }
 }

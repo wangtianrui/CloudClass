@@ -13,6 +13,7 @@ public class CloudClass extends Application {
     public static CloudClass mInstance;
     public static User user;
     public static Course course;
+    public static String signCode;
 
     @Override
     public void onCreate() {
