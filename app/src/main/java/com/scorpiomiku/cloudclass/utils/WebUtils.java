@@ -169,6 +169,46 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 发起签到
+     *
+     * @param data
+     * @param callback
+     */
+    public static void upSign(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "upSign/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 学生签到
+     *
+     * @param data
+     * @param callback
+     */
+    public static void studentSign(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "studentSign/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 通过课程ID获得签到
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getSign(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "getSign/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         Set<String> keys = data.keySet();

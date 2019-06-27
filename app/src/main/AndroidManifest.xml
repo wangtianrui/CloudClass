@@ -35,7 +35,7 @@
         <activity android:name=".modules.activity.RegisterActivity" />
         <activity android:name=".modules.activity.cloudclass.CreateCourseActivity" />
         <activity android:name=".modules.activity.cloudclass.AddCourseDetialActivity" />
-        <activity android:name=".modules.activity.cloudclass.UpFileActivity"></activity>
+        <activity android:name=".modules.activity.cloudclass.UpFileActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -47,6 +47,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".modules.activity.cloudclass.SignRecordActivity"></activity>
     </application>
 
 </manifest>

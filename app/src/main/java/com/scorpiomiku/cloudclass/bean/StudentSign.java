@@ -8,6 +8,8 @@ public class StudentSign {
     private String sign_id;
     private String up_time;
     private String student_id;
+//    private String id;
+
 
     @Override
     public String toString() {
@@ -15,8 +17,17 @@ public class StudentSign {
                 "sign_id='" + sign_id + '\'' +
                 ", up_time='" + up_time + '\'' +
                 ", student_id='" + student_id + '\'' +
+//                ", id='" + id + '\'' +
                 '}';
     }
+
+//    public String getId() {
+//        return id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     public String getSign_id() {
         return sign_id;
