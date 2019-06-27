@@ -34,28 +34,23 @@
             android:text="right text"
             android:textSize="16sp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/phone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="right|center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="学号:"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/id_card"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="item"
-                android:textSize="16sp" />
-        </LinearLayout>
+            android:paddingRight="9dp"
+            android:text="item"
+            android:textSize="16sp" />
 
 
+        <ImageView
+            android:id="@+id/bow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="2dp"
+            app:srcCompat="@drawable/ic_right_bow" />
     </LinearLayout>
 
     <include layout="@layout/view_line" />

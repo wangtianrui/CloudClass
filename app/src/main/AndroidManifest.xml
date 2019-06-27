@@ -48,7 +48,8 @@
         </provider>
 
         <activity android:name=".modules.activity.cloudclass.SignRecordActivity" />
-        <activity android:name=".modules.activity.cloudclass.SignMemberListActivity"></activity>
+        <activity android:name=".modules.activity.cloudclass.SignMemberListActivity" />
+        <activity android:name=".modules.activity.cloudclass.AddInformActivity"></activity>
     </application>
 
 </manifest>

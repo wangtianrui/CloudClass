@@ -221,6 +221,45 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 发送通知
+     *
+     * @param data
+     * @return
+     */
+    public static void upInform(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "create_inform/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 获取通知
+     *
+     * @param data
+     * @return
+     */
+    public static void getInform(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "get_inform/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+
+    /**
+     * 获取学生成员
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getMember(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "getCourseMember/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
 
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
