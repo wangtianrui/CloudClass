@@ -65,7 +65,7 @@
                     android:text="班级" />
 
                 <EditText
-                    android:id="@+id/et_class_name"
+                    android:id="@+id/et_class_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="7dp"

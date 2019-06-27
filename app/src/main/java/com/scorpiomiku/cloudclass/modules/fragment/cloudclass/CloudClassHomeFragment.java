@@ -1,8 +1,10 @@
 package com.scorpiomiku.cloudclass.modules.fragment.cloudclass;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +13,8 @@ import android.view.ViewGroup;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.adapter.ClassAdapter;
@@ -18,13 +22,20 @@ import com.scorpiomiku.cloudclass.base.BaseFragment;
 import com.scorpiomiku.cloudclass.bean.Course;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.CreateCourseActivity;
 import com.scorpiomiku.cloudclass.utils.MessageUtils;
+import com.scorpiomiku.cloudclass.utils.WebUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 /**
@@ -51,13 +62,28 @@ public class CloudClassHomeFragment extends BaseFragment {
 
     @Override
     protected void refreshData() {
-        mlist.clear();
-        Course course = new Course();
-        course.setName("Android");
-        course.setInvite_code("1534");
-        course.setTeacherNumber("于一");
-        mlist.add(course);
-        adapter.notifyDataSetChanged();
+        HashMap<String, String> data = new HashMap<>();
+        data.put("userId", CloudClass.user.getPhone());
+        WebUtils.getCourseList(data, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                JsonObject jsonObject = getJsonObj(response);
+                int result = jsonObject.get("result").getAsInt();
+                if (result != 0) {
+                    Gson gson = new Gson();
+                    Course[] courses = gson.fromJson(jsonObject.get("values"), Course[].class);
+                    mlist.clear();
+                    mlist.addAll(Arrays.asList(courses));
+                }
+
+                handler.sendEmptyMessage(result);
+            }
+        });
     }
 
     @Override
@@ -67,6 +93,7 @@ public class CloudClassHomeFragment extends BaseFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setNestedScrollingEnabled(false);
         initFloatButton();
+        refreshData();
     }
 
     @Override
@@ -79,7 +106,22 @@ public class CloudClassHomeFragment extends BaseFragment {
 
     @Override
     protected Handler initHandle() {
-        return null;
+        @SuppressLint("HandlerLeak") Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+
+                    case 0:
+                        MessageUtils.makeToast("查无课程");
+                        break;
+                    default:
+                        adapter.notifyDataSetChanged();
+                        break;
+                }
+            }
+        };
+        return handler;
     }
 
     @Override
@@ -125,5 +167,11 @@ public class CloudClassHomeFragment extends BaseFragment {
             }
         });
         fab.addButton(actionButtonActivate);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshData();
     }
 }

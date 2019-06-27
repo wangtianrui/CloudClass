@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.scorpiomiku.cloudclass.utils.MessageUtils;
 
 import java.io.IOException;
 
@@ -55,9 +56,9 @@ public abstract class BaseFragment extends Fragment {
 
     protected JsonObject getJsonObj(Response response) throws IOException {
         String result = response.body().string();
+        MessageUtils.logd(result);
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(result);
         return jsonObject;
-
     }
 }

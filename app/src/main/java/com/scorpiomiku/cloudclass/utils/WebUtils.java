@@ -79,6 +79,32 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+
+    /**
+     * 拉取课程
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getCourseList(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "get_course/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 加入课堂
+     * @param data
+     * @param callback
+     */
+    public static void joinCourse(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "joinCourse/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         Set<String> keys = data.keySet();

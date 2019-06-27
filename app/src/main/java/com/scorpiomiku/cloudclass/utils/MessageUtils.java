@@ -19,4 +19,8 @@ public class MessageUtils {
     public static void logd(String message) {
         Log.d(TAG, message);
     }
+
+    public static void loge(Exception e) {
+        Log.e(TAG, "loge: " + e.getMessage());
+    }
 }

@@ -39,7 +39,7 @@ public class CreateCourseActivity extends BaseActivity {
     ImageView ivClassCover;
     @BindView(R.id.tv_class)
     TextView tvClass;
-    @BindView(R.id.et_class_name)
+    @BindView(R.id.et_class_number)
     EditText etClassName;
     @BindView(R.id.et_course_name)
     EditText etCourseName;
@@ -64,6 +64,7 @@ public class CreateCourseActivity extends BaseActivity {
     public static String columnNumber = "";
     public static String classroomNumber = "";
     private static final String TAG = "CreateCourseActivity";
+    private String courseId = "";
 
     @Override
     protected Handler initHandle() {
@@ -73,12 +74,18 @@ public class CreateCourseActivity extends BaseActivity {
                 super.handleMessage(msg);
                 switch (msg.what) {
                     case 1:
-                        finish();
+                        HashMap<String, String> data = new HashMap<>();
+                        data.put("userId", CloudClass.user.getPhone());
+                        data.put("courseId", courseId);
+                        joinCrouse(data);
                         break;
                     case 0:
                         MessageUtils.makeToast("提交失败");
                         break;
                     case -1:
+                        break;
+                    case 2:
+                        finish();
                         break;
                 }
             }
@@ -118,9 +125,10 @@ public class CreateCourseActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.bt_create_class:
-                String name = etClassName.getText().toString().trim();
+                String name = etCourseName.getText().toString().trim();
                 String courseId = String.valueOf((new Random()).nextInt()).substring(0, 5)
                         + CloudClass.user.getPhone().substring(0, 5);
+                this.courseId = courseId;
                 String inviteCode = String.valueOf((new Random()).nextInt()).substring(1, 6);
                 String creatorId = CloudClass.user.getPhone();
                 if (classroomNumber.equals("")) {
@@ -149,6 +157,21 @@ public class CreateCourseActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    private void joinCrouse(HashMap<String, String> data) {
+        WebUtils.joinCourse(data, new okhttp3.Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                MessageUtils.loge(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                JsonObject jsonObject = getJsonObj(response);
+                handler.sendEmptyMessage(2);
+            }
+        });
     }
 
     @Override
