@@ -1,16 +1,20 @@
 package com.scorpiomiku.cloudclass.modules.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -135,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         if (CloudClass.user.getName().equals("")) {
             createAddInfor();
         }
+        checkPermission();
     }
 
 
@@ -229,5 +234,25 @@ public class MainActivity extends AppCompatActivity {
         JsonObject jsonObject = (JsonObject) jsonParser.parse(result);
         return jsonObject;
 
+    }
+
+
+    private void checkPermission() {
+        //使用兼容库就无需判断系统版本
+        int hasWriteStoragePermission = ContextCompat.checkSelfPermission(getApplication(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (hasWriteStoragePermission == PackageManager.PERMISSION_GRANTED) {
+            //拥有权限，执行操作
+        } else {
+            //没有权限，向用户请求权限
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.CALL_PHONE,
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.SEND_SMS
+                    },
+                    1);
+        }
     }
 }

@@ -35,6 +35,18 @@
         <activity android:name=".modules.activity.RegisterActivity" />
         <activity android:name=".modules.activity.cloudclass.CreateCourseActivity" />
         <activity android:name=".modules.activity.cloudclass.AddCourseDetialActivity" />
+        <activity android:name=".modules.activity.cloudclass.UpFileActivity"></activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.scorpiomiku.cloudclass.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>

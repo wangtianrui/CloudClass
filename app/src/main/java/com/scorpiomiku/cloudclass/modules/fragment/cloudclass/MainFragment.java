@@ -1,5 +1,6 @@
 package com.scorpiomiku.cloudclass.modules.fragment.cloudclass;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.base.BaseFragment;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.UpFileActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,6 +79,8 @@ public class MainFragment extends BaseFragment {
             case R.id.home_work_button:
                 break;
             case R.id.up_button:
+                Intent upIntent = new Intent(getContext(), UpFileActivity.class);
+                startActivity(upIntent);
                 break;
             case R.id.sign_button:
                 break;
