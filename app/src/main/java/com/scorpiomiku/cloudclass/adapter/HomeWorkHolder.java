@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.bean.HomeWork;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.homework.AnswerListActivity;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.homework.HandInHomeWorkActivity;
 import com.scorpiomiku.cloudclass.utils.StringUtils;
 
@@ -42,7 +43,9 @@ public class HomeWorkHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 if (CloudClass.user.getType() == 1) {
-
+                    Intent intent = new Intent(view.getContext(), AnswerListActivity.class);
+                    intent.putExtra("homework", homeWork);
+                    view.getContext().startActivity(intent);
                 } else {
                     Intent intent = new Intent(view.getContext(), HandInHomeWorkActivity.class);
                     intent.putExtra("homework", homeWork);

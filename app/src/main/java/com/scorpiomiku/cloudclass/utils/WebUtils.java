@@ -383,6 +383,19 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 获取用户
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getUser(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "get_user/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         Set<String> keys = data.keySet();
