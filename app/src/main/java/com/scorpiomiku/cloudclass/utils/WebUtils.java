@@ -340,9 +340,28 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 添加回答
+     *
+     * @param data
+     * @param callback
+     */
     public static void addAnswer(HashMap<String, String> data, Callback callback) {
         Request request = new Request.Builder().post(getBody(data))
-                .url(ConstantUtils.webHost + "/").build();
+                .url(ConstantUtils.webHost + "add_answer/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 获取回答
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getAnswer(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "get_answer/").build();
         Call call = mClient.newCall(request);
         call.enqueue(callback);
     }

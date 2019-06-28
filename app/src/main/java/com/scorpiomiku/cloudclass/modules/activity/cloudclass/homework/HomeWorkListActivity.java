@@ -1,4 +1,4 @@
-package com.scorpiomiku.cloudclass.modules.activity.cloudclass;
+package com.scorpiomiku.cloudclass.modules.activity.cloudclass.homework;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,10 +15,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
-import com.scorpiomiku.cloudclass.adapter.CommunicationAdapter;
+import com.scorpiomiku.cloudclass.adapter.HomeWorkAdapter;
 import com.scorpiomiku.cloudclass.base.BaseActivity;
-import com.scorpiomiku.cloudclass.bean.Communication;
-import com.scorpiomiku.cloudclass.utils.MessageUtils;
+import com.scorpiomiku.cloudclass.bean.HomeWork;
 import com.scorpiomiku.cloudclass.utils.WebUtils;
 
 import java.io.IOException;
@@ -33,17 +32,18 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class CommunicationActivity extends BaseActivity {
+public class HomeWorkListActivity extends BaseActivity {
 
 
     @BindView(R.id.back_button)
     ImageView backButton;
-    @BindView(R.id.bt_begin_chat)
-    Button btBeginChat;
+    @BindView(R.id.send_new_home_work)
+    Button sendNewHomeWork;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-    private ArrayList<Communication> list = new ArrayList<>();
-    private CommunicationAdapter adapter;
+
+    private ArrayList<HomeWork> list = new ArrayList<>();
+    private HomeWorkAdapter adapter;
 
     @Override
     protected Handler initHandle() {
@@ -53,7 +53,6 @@ public class CommunicationActivity extends BaseActivity {
                 super.handleMessage(msg);
                 switch (msg.what) {
                     case 0:
-                        MessageUtils.makeToast("目前没有任何交流哟");
                         break;
                     case -1:
                         break;
@@ -68,23 +67,23 @@ public class CommunicationActivity extends BaseActivity {
 
     @Override
     public void iniview() {
-        adapter = new CommunicationAdapter(CommunicationActivity.this, list);
-        recyclerView.setAdapter(adapter);
+        adapter = new HomeWorkAdapter(list, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setAdapter(adapter);
         refreshData();
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_communication;
+        return R.layout.activity_home_work_list;
     }
 
     @Override
     public void refreshData() {
         HashMap<String, String> data = new HashMap<>();
         data.put("courseId", CloudClass.course.getCourse_id());
-        WebUtils.getCommunication(data, new Callback() {
+        WebUtils.getHomeWork(data, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -96,9 +95,9 @@ public class CommunicationActivity extends BaseActivity {
                 int result = jsonObject.get("result").getAsInt();
                 if (result > 0) {
                     Gson gson = new Gson();
-                    Communication[] communications = gson.fromJson(jsonObject.get("values"), Communication[].class);
+                    HomeWork[] homeWork = gson.fromJson(jsonObject.get("values"), HomeWork[].class);
                     list.clear();
-                    list.addAll(Arrays.asList(communications));
+                    list.addAll(Arrays.asList(homeWork));
                 }
                 handler.sendEmptyMessage(result);
             }
@@ -112,14 +111,14 @@ public class CommunicationActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.back_button, R.id.bt_begin_chat})
+    @OnClick({R.id.back_button, R.id.send_new_home_work})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back_button:
                 finish();
                 break;
-            case R.id.bt_begin_chat:
-                Intent intent = new Intent(CommunicationActivity.this, SendCommunicationActivity.class);
+            case R.id.send_new_home_work:
+                Intent intent = new Intent(this, SendHomeWorkActivity.class);
                 startActivity(intent);
                 break;
         }

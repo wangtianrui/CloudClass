@@ -1,4 +1,4 @@
-package com.scorpiomiku.cloudclass.modules.activity.cloudclass;
+package com.scorpiomiku.cloudclass.modules.activity.cloudclass.communicaiton;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

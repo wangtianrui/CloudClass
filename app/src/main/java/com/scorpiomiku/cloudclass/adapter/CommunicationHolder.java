@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.bean.Communication;
-import com.scorpiomiku.cloudclass.modules.activity.cloudclass.CommunicationDetailActivity;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.communicaiton.CommunicationDetailActivity;
 import com.scorpiomiku.cloudclass.utils.StringUtils;
 
 import butterknife.BindView;

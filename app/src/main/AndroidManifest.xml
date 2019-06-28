@@ -47,15 +47,16 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".modules.activity.cloudclass.SignRecordActivity" />
-        <activity android:name=".modules.activity.cloudclass.SignMemberListActivity" />
+        <activity android:name=".modules.activity.cloudclass.sign.SignRecordActivity" />
+        <activity android:name=".modules.activity.cloudclass.sign.SignMemberListActivity" />
         <activity android:name=".modules.activity.cloudclass.AddInformActivity" />
         <activity android:name=".modules.activity.cloudclass.StudentDetailActivity" />
-        <activity android:name=".modules.activity.cloudclass.CommunicationActivity" />
-        <activity android:name=".modules.activity.cloudclass.SendCommunicationActivity" />
-        <activity android:name=".modules.activity.cloudclass.CommunicationDetailActivity" />
-        <activity android:name=".modules.activity.cloudclass.HomeWorkListActivity" />
-        <activity android:name=".modules.activity.cloudclass.SendHomeWorkActivity"></activity>
+        <activity android:name=".modules.activity.cloudclass.communicaiton.CommunicationActivity" />
+        <activity android:name=".modules.activity.cloudclass.communicaiton.SendCommunicationActivity" />
+        <activity android:name=".modules.activity.cloudclass.communicaiton.CommunicationDetailActivity" />
+        <activity android:name=".modules.activity.cloudclass.homework.HomeWorkListActivity" />
+        <activity android:name=".modules.activity.cloudclass.homework.SendHomeWorkActivity" />
+        <activity android:name=".modules.activity.cloudclass.homework.HandInHomeWorkActivity"></activity>
     </application>
 
 </manifest>

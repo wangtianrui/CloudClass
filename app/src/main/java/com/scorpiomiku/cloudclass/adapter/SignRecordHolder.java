@@ -8,8 +8,7 @@ import android.widget.TextView;
 import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.bean.Sign;
-import com.scorpiomiku.cloudclass.bean.StudentSign;
-import com.scorpiomiku.cloudclass.modules.activity.cloudclass.SignMemberListActivity;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.sign.SignMemberListActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
