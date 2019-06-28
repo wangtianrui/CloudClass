@@ -288,6 +288,32 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 发送交流的item
+     *
+     * @param data
+     * @param callback
+     */
+    public static void sendCommunicationItem(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "create_communicationitem/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 获取交流item
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getCommunicationItem(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "get_communicationitem/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         Set<String> keys = data.keySet();
