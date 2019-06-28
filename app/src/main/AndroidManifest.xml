@@ -50,7 +50,10 @@
         <activity android:name=".modules.activity.cloudclass.SignRecordActivity" />
         <activity android:name=".modules.activity.cloudclass.SignMemberListActivity" />
         <activity android:name=".modules.activity.cloudclass.AddInformActivity" />
-        <activity android:name=".modules.activity.cloudclass.StudentDetailActivity"></activity>
+        <activity android:name=".modules.activity.cloudclass.StudentDetailActivity" />
+        <activity android:name=".modules.activity.cloudclass.CommunicationActivity" />
+        <activity android:name=".modules.activity.cloudclass.SendCommunicationActivity" />
+        <activity android:name=".modules.activity.cloudclass.CommunicationDetailActivity"></activity>
     </application>
 
 </manifest>

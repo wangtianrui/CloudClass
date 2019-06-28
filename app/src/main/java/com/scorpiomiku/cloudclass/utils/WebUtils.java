@@ -261,6 +261,33 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+
+    /**
+     * 发起讨论
+     *
+     * @param data
+     * @param callback
+     */
+    public static void addCommunication(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "create_communication/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 获取已有讨论
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getCommunication(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "get_communication/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         Set<String> keys = data.keySet();

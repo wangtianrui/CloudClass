@@ -21,6 +21,7 @@ import com.scorpiomiku.cloudclass.base.BaseActivity;
 import com.scorpiomiku.cloudclass.bean.User;
 import com.scorpiomiku.cloudclass.utils.CommonUtils;
 import com.scorpiomiku.cloudclass.utils.ConstantUtils;
+import com.scorpiomiku.cloudclass.utils.MessageUtils;
 import com.scorpiomiku.cloudclass.utils.StringUtils;
 
 import butterknife.BindView;
@@ -98,13 +99,16 @@ public class StudentDetailActivity extends BaseActivity {
 
             switch (item.getItemId()) {
                 case R.id.contact_sms:
-                    CommonUtils.toMessageChat(StudentDetailActivity.this, user.getPhone());
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setType("vnd.android-dir/mms-sms");
+                    i.setData(Uri.parse("smsto:" + user.getPhone()));//此为号码
+                    startActivity(i);
                     return true;
                 case R.id.contact_phone:
                     Uri uri = Uri.parse("tel:" + user.getPhone());
                     Intent intent = new Intent(Intent.ACTION_CALL, uri);
                     if (ActivityCompat.checkSelfPermission(StudentDetailActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        Toast.makeText(StudentDetailActivity.this, "没有权限", Toast.LENGTH_SHORT);
+                        MessageUtils.makeToast("没有权限");
                     }
                     startActivity(intent);
                     return true;

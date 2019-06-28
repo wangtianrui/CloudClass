@@ -22,6 +22,7 @@ import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.adapter.SourceAdapter;
 import com.scorpiomiku.cloudclass.base.BaseFragment;
 import com.scorpiomiku.cloudclass.bean.MySource;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.CommunicationActivity;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.SignRecordActivity;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.UpFileActivity;
 import com.scorpiomiku.cloudclass.utils.MessageUtils;
@@ -168,6 +169,8 @@ public class MainFragment extends BaseFragment {
                 }
                 break;
             case R.id.communication_button:
+                Intent intent = new Intent(getContext(), CommunicationActivity.class);
+                startActivity(intent);
                 break;
             case R.id.score_button:
                 break;
