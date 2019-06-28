@@ -53,7 +53,9 @@
         <activity android:name=".modules.activity.cloudclass.StudentDetailActivity" />
         <activity android:name=".modules.activity.cloudclass.CommunicationActivity" />
         <activity android:name=".modules.activity.cloudclass.SendCommunicationActivity" />
-        <activity android:name=".modules.activity.cloudclass.CommunicationDetailActivity"></activity>
+        <activity android:name=".modules.activity.cloudclass.CommunicationDetailActivity" />
+        <activity android:name=".modules.activity.cloudclass.HomeWorkListActivity" />
+        <activity android:name=".modules.activity.cloudclass.SendHomeWorkActivity"></activity>
     </application>
 
 </manifest>

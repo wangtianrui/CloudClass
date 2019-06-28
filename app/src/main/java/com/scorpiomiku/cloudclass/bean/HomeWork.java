@@ -10,6 +10,7 @@ public class HomeWork {
     private String content;
     private String up_time;
     private String uper_id;
+    private String id;
 
     @Override
     public String toString() {
@@ -19,7 +20,16 @@ public class HomeWork {
                 ", content='" + content + '\'' +
                 ", up_time='" + up_time + '\'' +
                 ", uper_id='" + uper_id + '\'' +
+                ", id='" + id + '\'' +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCourse_id() {

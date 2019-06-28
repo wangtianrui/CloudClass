@@ -23,6 +23,7 @@ import com.scorpiomiku.cloudclass.adapter.SourceAdapter;
 import com.scorpiomiku.cloudclass.base.BaseFragment;
 import com.scorpiomiku.cloudclass.bean.MySource;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.CommunicationActivity;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.HomeWorkListActivity;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.SignRecordActivity;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.UpFileActivity;
 import com.scorpiomiku.cloudclass.utils.MessageUtils;
@@ -151,6 +152,8 @@ public class MainFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.home_work_button:
+                Intent i1 = new Intent(getContext(), HomeWorkListActivity.class);
+                startActivity(i1);
                 break;
             case R.id.up_button:
                 if (CloudClass.user.getType() == 1) {
@@ -162,8 +165,8 @@ public class MainFragment extends BaseFragment {
                 break;
             case R.id.sign_button:
                 if (CloudClass.user.getType() == 1) {
-                    Intent intent = new Intent(getContext(), SignRecordActivity.class);
-                    startActivity(intent);
+                    Intent i = new Intent(getContext(), SignRecordActivity.class);
+                    startActivity(i);
                 } else {
                     showInputDialog();
                 }

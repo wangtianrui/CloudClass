@@ -314,6 +314,39 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 发布作业
+     *
+     * @param data
+     * @param callback
+     */
+    public static void addHomeWork(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "add_homework/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 获取作业
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getHomeWork(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "get_homework/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    public static void addAnswer(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         Set<String> keys = data.keySet();
