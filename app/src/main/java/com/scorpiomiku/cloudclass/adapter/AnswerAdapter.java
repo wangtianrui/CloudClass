@@ -34,7 +34,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull AnswerHolder holder, int position) {
-        holder.bindView(list.get(position));
+        holder.bindView(list.get(position), position);
     }
 
     @Override

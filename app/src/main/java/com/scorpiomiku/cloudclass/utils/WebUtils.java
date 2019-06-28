@@ -396,6 +396,32 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 为回答打分
+     *
+     * @param data
+     * @param callback
+     */
+    public static void scoreAnswer(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "scoreAnswer/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 打分
+     *
+     * @param data
+     * @param callback
+     */
+    public static void addScore(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "addScore/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         Set<String> keys = data.keySet();

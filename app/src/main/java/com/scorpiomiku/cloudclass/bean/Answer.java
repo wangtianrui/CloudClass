@@ -11,6 +11,7 @@ public class Answer {
     private String up_time;
     private String image;
     private float score;
+    private String id;
 
     @Override
     public String toString() {
@@ -21,7 +22,16 @@ public class Answer {
                 ", up_time='" + up_time + '\'' +
                 ", image='" + image + '\'' +
                 ", score=" + score +
+                ", id='" + id + '\'' +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public float getScore() {

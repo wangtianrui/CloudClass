@@ -1,6 +1,7 @@
 package com.scorpiomiku.cloudclass.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +13,11 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.scorpiomiku.cloudclass.CloudClass;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.bean.Answer;
 import com.scorpiomiku.cloudclass.bean.User;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.homework.GradeActivity;
 import com.scorpiomiku.cloudclass.utils.ConstantUtils;
 import com.scorpiomiku.cloudclass.utils.StringUtils;
 import com.scorpiomiku.cloudclass.utils.WebUtils;
@@ -71,7 +74,7 @@ public class AnswerHolder extends RecyclerView.ViewHolder {
     }
 
     @SuppressLint("SetTextI18n")
-    public void bindView(Answer answer) {
+    public void bindView(Answer answer, int position) {
         HashMap<String, String> data = new HashMap<>();
         data.put("userId", answer.getUper_id());
         WebUtils.getUser(data, new Callback() {
@@ -96,6 +99,14 @@ public class AnswerHolder extends RecyclerView.ViewHolder {
             scoreTextView.setText(answer.getScore() + "");
             checkImageView.setImageResource(R.drawable.ic_checked);
         }
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), GradeActivity.class);
+                view.getContext().startActivity(intent);
+                CloudClass.position = position;
+            }
+        });
     }
 
     private void setUI() {

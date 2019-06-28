@@ -38,7 +38,7 @@ public class AnswerListActivity extends BaseActivity {
     ImageView backButton;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-    private ArrayList<Answer> list = new ArrayList<>();
+    public static ArrayList<Answer> list = new ArrayList<>();
     private AnswerAdapter adapter;
 
     private HomeWork homeWork;
@@ -96,6 +96,7 @@ public class AnswerListActivity extends BaseActivity {
                 if (result > 0) {
                     Gson gson = new Gson();
                     Answer[] answers = gson.fromJson(jsonObject.get("values"), Answer[].class);
+                    list.clear();
                     list.addAll(Arrays.asList(answers));
                 }
                 handler.sendEmptyMessage(result);
@@ -113,5 +114,11 @@ public class AnswerListActivity extends BaseActivity {
     @OnClick(R.id.back_button)
     public void onViewClicked() {
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshData();
     }
 }
