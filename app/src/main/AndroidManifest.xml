@@ -58,7 +58,8 @@
         <activity android:name=".modules.activity.cloudclass.homework.SendHomeWorkActivity" />
         <activity android:name=".modules.activity.cloudclass.homework.HandInHomeWorkActivity" />
         <activity android:name=".modules.activity.cloudclass.homework.AnswerListActivity" />
-        <activity android:name=".modules.activity.cloudclass.homework.GradeActivity"></activity>
+        <activity android:name=".modules.activity.cloudclass.homework.GradeActivity" />
+        <activity android:name=".modules.activity.cloudclass.ScoreListActivity"></activity>
     </application>
 
 </manifest>

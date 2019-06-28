@@ -22,6 +22,7 @@ import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.adapter.SourceAdapter;
 import com.scorpiomiku.cloudclass.base.BaseFragment;
 import com.scorpiomiku.cloudclass.bean.MySource;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.ScoreListActivity;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.communicaiton.CommunicationActivity;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.homework.HomeWorkListActivity;
 import com.scorpiomiku.cloudclass.modules.activity.cloudclass.sign.SignRecordActivity;
@@ -175,6 +176,8 @@ public class MainFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.score_button:
+                Intent intent1 = new Intent(getContext(), ScoreListActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

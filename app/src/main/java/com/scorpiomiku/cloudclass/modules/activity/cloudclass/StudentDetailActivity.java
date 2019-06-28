@@ -1,11 +1,13 @@
 package com.scorpiomiku.cloudclass.modules.activity.cloudclass;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.JsonObject;
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.base.BaseActivity;
 import com.scorpiomiku.cloudclass.bean.User;
@@ -23,10 +26,17 @@ import com.scorpiomiku.cloudclass.utils.CommonUtils;
 import com.scorpiomiku.cloudclass.utils.ConstantUtils;
 import com.scorpiomiku.cloudclass.utils.MessageUtils;
 import com.scorpiomiku.cloudclass.utils.StringUtils;
+import com.scorpiomiku.cloudclass.utils.WebUtils;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class StudentDetailActivity extends BaseActivity {
 
@@ -50,10 +60,23 @@ public class StudentDetailActivity extends BaseActivity {
     @BindView(R.id.bn_contact_bottom)
     BottomNavigationView bnContactBottom;
     private User user;
+    private float meanScore;
 
     @Override
     protected Handler initHandle() {
-        return null;
+        @SuppressLint("HandlerLeak") Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case 1:
+                        score.setText(meanScore + "");
+                        break;
+
+                }
+            }
+        };
+        return handler;
     }
 
     @Override
@@ -66,6 +89,21 @@ public class StudentDetailActivity extends BaseActivity {
         idCard.setText(user.getId_card());
         Glide.with(this).load(ConstantUtils.mediaHost + user.getAvatar()).into(avatar);
 
+        HashMap<String, String> data = new HashMap<>();
+        data.put("studentId", user.getPhone());
+        WebUtils.getMeanScore(data, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                JsonObject jsonObject = getJsonObj(response);
+                meanScore = jsonObject.get("values").getAsFloat();
+                handler.sendEmptyMessage(jsonObject.get("result").getAsInt());
+            }
+        });
     }
 
     @Override
