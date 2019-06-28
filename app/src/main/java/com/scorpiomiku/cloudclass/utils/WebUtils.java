@@ -341,14 +341,31 @@ public class WebUtils {
     }
 
     /**
-     * 添加回答
+     * 添加答案
      *
-     * @param data
+     * @param homeworkId
+     * @param uperId
+     * @param content
+     * @param path
+     * @param source
      * @param callback
      */
-    public static void addAnswer(HashMap<String, String> data, Callback callback) {
-        Request request = new Request.Builder().post(getBody(data))
-                .url(ConstantUtils.webHost + "add_answer/").build();
+    public static void addAnswer(String homeworkId, String uperId, String content, String path,
+                                 File source, Callback callback) {
+        MediaType mediaType = MediaType.parse("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW");
+
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("homework_id", homeworkId)
+                .addFormDataPart("content", content)
+                .addFormDataPart("userId", uperId)
+                .addFormDataPart("image",
+                        String.valueOf(new Random().nextInt()) + "." + path.split("\\.")[1],
+                        RequestBody.create(mediaType, source)
+                )
+                .build();
+        Request request = new Request.Builder().post(requestBody).url(ConstantUtils.webHost +
+                "add_answer/").build();
         Call call = mClient.newCall(request);
         call.enqueue(callback);
     }

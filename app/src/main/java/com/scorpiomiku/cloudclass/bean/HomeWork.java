@@ -1,10 +1,12 @@
 package com.scorpiomiku.cloudclass.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by ScorpioMiku on 2019/6/26.
  */
 
-public class HomeWork {
+public class HomeWork implements Serializable {
     private String course_id;
     private String title;
     private String content;
