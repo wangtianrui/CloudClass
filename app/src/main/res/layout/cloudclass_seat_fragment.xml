@@ -17,6 +17,17 @@
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp" />
 
+        <TextView
+            android:id="@+id/plat"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#81b17c"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="讲台"
+            android:textColor="#FFF" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="wrap_content"
