@@ -435,6 +435,45 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 添加课表元素
+     *
+     * @param data
+     * @param callback
+     */
+    public static void addCourseTable(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "add_courseTable/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 获取课表
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getCourseTable(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "get_courseTable/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 删除课表
+     *
+     * @param data
+     * @param callback
+     */
+    public static void deleteCourseTable(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "deleteCourseTable/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         Set<String> keys = data.keySet();

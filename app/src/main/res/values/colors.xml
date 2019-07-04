@@ -7,4 +7,6 @@
     <color name="listitem_greenyellow">#ff87b869</color>
     <color name="black">#4b4c4d</color>
     <color name="red">#e70000</color>
+    <color name="item_divider">#EFEFEF</color>
+    <color name="transparent">#00000000</color>
 </resources>

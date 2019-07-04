@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="请完善信息"
+        android:text="课堂信息"
         android:textColor="#FFF"
         android:textSize="18sp" />
 
@@ -45,7 +45,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/selector_bg_edit"
-                        android:hint="姓名"
+                        android:hint="课堂名"
                         android:inputType="textPersonName"
                         android:paddingBottom="2dp"
                         android:textColor="#ececec"
@@ -69,11 +69,11 @@
                     android:textColorHint="#c5c5c5">
 
                     <EditText
-                        android:id="@+id/et_sex"
+                        android:id="@+id/et_week"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/selector_bg_edit"
-                        android:hint="性别"
+                        android:hint="周次"
                         android:inputType="textPersonName"
                         android:paddingBottom="2dp"
                         android:textColor="#ececec"
@@ -97,11 +97,11 @@
                     android:textColorHint="#c5c5c5">
 
                     <EditText
-                        android:id="@+id/et_classnumber"
+                        android:id="@+id/et_section"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/selector_bg_edit"
-                        android:hint="班级/老师若没负责班级可以不填"
+                        android:hint="节次(1、3、5、7、9)"
                         android:inputType="textPersonName"
                         android:paddingBottom="2dp"
                         android:textColor="#ececec"
@@ -125,11 +125,11 @@
                     android:textColorHint="#c5c5c5">
 
                     <EditText
-                        android:id="@+id/et_college"
+                        android:id="@+id/et_classroom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/selector_bg_edit"
-                        android:hint="学院"
+                        android:hint="教室号"
                         android:inputType="textPersonName"
                         android:paddingBottom="2dp"
                         android:textColor="#ececec"
