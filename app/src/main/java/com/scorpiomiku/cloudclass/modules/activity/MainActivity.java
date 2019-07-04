@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
@@ -35,6 +36,7 @@ import com.scorpiomiku.cloudclass.base.BaseFragment;
 import com.scorpiomiku.cloudclass.modules.fragment.cloudclass.CloudClassHomeFragment;
 import com.scorpiomiku.cloudclass.modules.fragment.schedule.ScheduleHomeFragment;
 import com.scorpiomiku.cloudclass.modules.fragment.user.UserHomeFragment;
+import com.scorpiomiku.cloudclass.power.PowerService;
 import com.scorpiomiku.cloudclass.utils.MessageUtils;
 import com.scorpiomiku.cloudclass.utils.WebUtils;
 
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             createAddInfor();
         }
         checkPermission();
+
     }
 
 

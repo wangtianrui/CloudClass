@@ -1,5 +1,6 @@
 package com.scorpiomiku.cloudclass.modules.activity.cloudclass;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -17,6 +18,7 @@ import com.scorpiomiku.cloudclass.modules.fragment.cloudclass.InformFragment;
 import com.scorpiomiku.cloudclass.modules.fragment.cloudclass.MainFragment;
 import com.scorpiomiku.cloudclass.modules.fragment.cloudclass.MemberListFragment;
 import com.scorpiomiku.cloudclass.modules.fragment.cloudclass.SeatFragment;
+import com.scorpiomiku.cloudclass.power.PowerService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,6 +96,10 @@ public class CloudClassActivity extends AppCompatActivity {
         informItem = navigation.getMenu().findItem(R.id.navigation_inform);
         fragmentManager = getSupportFragmentManager();
         initFragmentManager();
+        Intent intent = new Intent(this, PowerService.class);
+        intent.putExtra("courseId", CloudClass.course.getCourse_id());
+        intent.putExtra("userId", CloudClass.user.getPhone());
+        startService(intent);
     }
 
     @OnClick(R.id.back_button)

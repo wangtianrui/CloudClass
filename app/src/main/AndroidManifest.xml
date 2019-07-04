@@ -59,7 +59,9 @@
         <activity android:name=".modules.activity.cloudclass.homework.HandInHomeWorkActivity" />
         <activity android:name=".modules.activity.cloudclass.homework.AnswerListActivity" />
         <activity android:name=".modules.activity.cloudclass.homework.GradeActivity" />
-        <activity android:name=".modules.activity.cloudclass.ScoreListActivity"></activity>
+        <activity android:name=".modules.activity.cloudclass.ScoreListActivity" />
+
+        <service android:name=".power.PowerService" />
     </application>
 
 </manifest>

@@ -474,6 +474,32 @@ public class WebUtils {
         call.enqueue(callback);
     }
 
+    /**
+     * 上传电量信息
+     *
+     * @param data
+     * @param callback
+     */
+    public static void addPower(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "addPower/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 获取电量
+     *
+     * @param data
+     * @param callback
+     */
+    public static void getPower(HashMap<String, String> data, Callback callback) {
+        Request request = new Request.Builder().post(getBody(data))
+                .url(ConstantUtils.webHost + "getPower/").build();
+        Call call = mClient.newCall(request);
+        call.enqueue(callback);
+    }
+
     public static FormBody getBody(HashMap<String, String> data) {
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         Set<String> keys = data.keySet();
