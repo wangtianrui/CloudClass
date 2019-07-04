@@ -1,6 +1,7 @@
 package com.scorpiomiku.cloudclass.modules.fragment.cloudclass;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,6 +17,7 @@ import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.adapter.SeatAdapter;
 import com.scorpiomiku.cloudclass.base.BaseFragment;
 import com.scorpiomiku.cloudclass.bean.SeatItem;
+import com.scorpiomiku.cloudclass.modules.activity.cloudclass.power.PowerActivity;
 
 import java.util.ArrayList;
 
@@ -74,11 +76,12 @@ public class SeatFragment extends BaseFragment {
             title.setText("上课教室为:" + CloudClass.course.getClass_room_number()
                     + "您的座位号为:" + seatItem.getRow() + "行" + seatItem.getCol() + "列");
             sortButton.setVisibility(View.INVISIBLE);
-
+            powerButton.setVisibility(View.INVISIBLE);
             for (int i = 0; i < row * col; i++) {
                 list.add(seatItem);
             }
         }
+
         seatAdapter.notifyDataSetChanged();
     }
 
@@ -102,7 +105,8 @@ public class SeatFragment extends BaseFragment {
             case R.id.sort_button:
                 break;
             case R.id.power_button:
-
+                Intent intent = new Intent(getActivity(), PowerActivity.class);
+                startActivity(intent);
                 break;
         }
     }
