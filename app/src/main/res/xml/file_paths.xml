@@ -21,4 +21,7 @@
     <external-path
         name="external_files"
         path="." />// .表示根目录
+    <external-path
+        name="download"
+        path="download/" />
 </paths>

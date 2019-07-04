@@ -1,5 +1,7 @@
 package com.scorpiomiku.cloudclass.adapter;
 
+import android.app.ProgressDialog;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +12,11 @@ import android.widget.TextView;
 
 import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.bean.MySource;
+import com.scorpiomiku.cloudclass.utils.ConstantUtils;
+import com.scorpiomiku.cloudclass.utils.DownloadUtils;
+import com.scorpiomiku.cloudclass.utils.MessageUtils;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +40,7 @@ public class SourceHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.whole_view)
     RelativeLayout wholeView;
     private View view;
+    private MySource mySource;
 
     public SourceHolder(View itemView) {
         super(itemView);
@@ -41,6 +49,7 @@ public class SourceHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindView(MySource mySource) {
+        this.mySource = mySource;
         switch (mySource.getType()) {
             case 0:
                 //ppt
@@ -73,5 +82,59 @@ public class SourceHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.whole_view)
     public void onViewClicked() {
+        final ProgressDialog dialog = new ProgressDialog(itemView.getContext());
+        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(true);
+        dialog.setTitle("正在下载中");
+        dialog.setMessage("请稍后...");
+        dialog.setProgress(0);
+        dialog.setMax(100);
+        dialog.show();
+
+        DownloadUtils.get().download(itemView.getContext(), ConstantUtils.mediaHost + mySource.getSource_path(),
+                "/download/", mySource.getSource_name(), new DownloadUtils.OnDownloadListener() {
+                    @Override
+                    public void onDownloadSuccess() {
+                        wholeView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                MessageUtils.makeToast("下载成功");
+                                // 这里的弹框设置了进度条，下同
+                                dialog.dismiss();
+
+                                if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                                    return;
+                                }
+
+                                File file = new File(Environment.getExternalStorageDirectory().getPath() + "/download/" + fileName);
+
+                                try {
+
+
+                                } catch (Exception e) {
+
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onDownloading(int progress) {
+                        dialog.setProgress(progress);
+                    }
+
+                    @Override
+                    public void onDownloadFailed() {
+                        wholeView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                });
     }
 }
