@@ -99,7 +99,9 @@ public class CloudClassActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PowerService.class);
         intent.putExtra("courseId", CloudClass.course.getCourse_id());
         intent.putExtra("userId", CloudClass.user.getPhone());
-        startService(intent);
+        if (CloudClass.user.getType() != 1) {
+            startService(intent);
+        }
     }
 
     @OnClick(R.id.back_button)

@@ -36,6 +36,8 @@ public class SeatFragment extends BaseFragment {
     TextView title;
     @BindView(R.id.sort_button)
     Button sortButton;
+    @BindView(R.id.power_button)
+    Button powerButton;
     private ArrayList<SeatItem> list = new ArrayList<>();
     private SeatAdapter seatAdapter;
     private SeatItem seatItem;
@@ -94,7 +96,14 @@ public class SeatFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick(R.id.sort_button)
-    public void onViewClicked() {
+    @OnClick({R.id.sort_button, R.id.power_button})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.sort_button:
+                break;
+            case R.id.power_button:
+
+                break;
+        }
     }
 }

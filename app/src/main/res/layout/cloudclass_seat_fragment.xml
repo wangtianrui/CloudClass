@@ -36,6 +36,17 @@
             android:background="#41a4f5"
             android:text="智能排位"
             android:textColor="#FFF" />
+
+        <Button
+            android:id="@+id/power_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="50dp"
+            android:background="#41a4f5"
+            android:text="手机电量可视化"
+            android:textColor="#FFF" />
     </LinearLayout>
 
 </ScrollView>

@@ -62,6 +62,8 @@
         <activity android:name=".modules.activity.cloudclass.ScoreListActivity" />
 
         <service android:name=".power.PowerService" />
+
+        <activity android:name=".modules.activity.cloudclass.power.PowerActivity"></activity>
     </application>
 
 </manifest>
