@@ -99,7 +99,7 @@
                         android:layout_marginStart="5dp"
                         android:background="@null"
                         android:hint="密码"
-                        android:inputType="textAutoComplete"
+                        android:inputType="textPassword"
                         android:lines="1"
                         android:maxLines="1"
                         android:paddingBottom="10dp"

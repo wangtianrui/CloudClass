@@ -96,10 +96,12 @@ public class LoginActivity extends BaseActivity {
                 super.handleMessage(msg);
                 switch (msg.what) {
                     case 1:
+                        clearInput();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         break;
                     case 0:
+                        clearInput();
                         MessageUtils.makeToast("密码错误");
                         break;
                     case -1:
@@ -108,6 +110,11 @@ public class LoginActivity extends BaseActivity {
             }
         };
         return handler;
+    }
+
+    private void clearInput() {
+        loginEdtUsername.setText("");
+        loginEdtPassword.setText("");
     }
 
     @Override

@@ -76,7 +76,7 @@ public class PowerHolder extends RecyclerView.ViewHolder {
         pointValues.add(new Entry(0, 100));
         int i;
         for (i = 1; i <= levels.length - 1; i++) {
-            pointValues.add(new Entry(i, Float.valueOf(levels[i]) - (new Random()).nextInt(10) / 10.0f * i));
+            pointValues.add(new Entry(i, Float.valueOf(levels[i]) ));
         }
         pointValues.add(new Entry(i, 0));
         ChartMaker.initSingleLineChart(chart, pointValues, "电量情况");

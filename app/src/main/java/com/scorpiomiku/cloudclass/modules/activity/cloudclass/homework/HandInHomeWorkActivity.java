@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -33,6 +34,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -164,7 +167,7 @@ public class HandInHomeWorkActivity extends BaseActivity {
         // 步骤一：创建存储照片的文件
         String path = getFilesDir() + File.separator + "images" + File.separator;
         File file = new File(path, "test.jpg");
-        imageFile = file;
+
         if (!file.getParentFile().exists())
             file.getParentFile().mkdirs();
 
@@ -198,6 +201,7 @@ public class HandInHomeWorkActivity extends BaseActivity {
             }
 
             imageView.setImageBitmap(bm);
+            imageFile = image2File(bm);
             hasPic = true;
         }
     }
@@ -257,6 +261,43 @@ public class HandInHomeWorkActivity extends BaseActivity {
         ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
         return bitmap;
+    }
+
+    /**
+     * 压缩图片（质量压缩）
+     *
+     * @param bitmap
+     */
+    private File image2File(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
+            baos.reset();//重置baos即清空baos
+            options -= 10;//每次都减少10
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+            long length = baos.toByteArray().length;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date(System.currentTimeMillis());
+        String filename = format.format(date);
+        File file = new File(Environment.getExternalStorageDirectory(), filename + ".png");
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            try {
+                fos.write(baos.toByteArray());
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        }
+
+        return file;
     }
 
 

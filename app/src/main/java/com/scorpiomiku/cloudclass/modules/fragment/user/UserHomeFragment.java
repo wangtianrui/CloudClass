@@ -93,7 +93,11 @@ public class UserHomeFragment extends BaseFragment {
     }
 
     public void setUI() {
-        Glide.with(getContext()).load(ConstantUtils.mediaHost + CloudClass.user.getAvatar()).into(avatar);
+        if (CloudClass.user.getType() == 1) {
+            Glide.with(getContext()).load(R.drawable.ic_teacher).into(avatar);
+        } else {
+            Glide.with(getContext()).load(R.drawable.ic_student).into(avatar);
+        }
         nameTextView.setText(CloudClass.user.getName());
         sexTextView.setText(CloudClass.user.getSex());
         phoneTextView.setText(CloudClass.user.getPhone());

@@ -18,6 +18,7 @@ import com.scorpiomiku.cloudclass.R;
 import com.scorpiomiku.cloudclass.adapter.HomeWorkAdapter;
 import com.scorpiomiku.cloudclass.base.BaseActivity;
 import com.scorpiomiku.cloudclass.bean.HomeWork;
+import com.scorpiomiku.cloudclass.utils.MessageUtils;
 import com.scorpiomiku.cloudclass.utils.WebUtils;
 
 import java.io.IOException;
@@ -118,8 +119,12 @@ public class HomeWorkListActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.send_new_home_work:
-                Intent intent = new Intent(this, SendHomeWorkActivity.class);
-                startActivity(intent);
+                if (CloudClass.user.getType() == 1) {
+                    Intent intent = new Intent(this, SendHomeWorkActivity.class);
+                    startActivity(intent);
+                }else{
+                    MessageUtils.makeToast("学生不能发布作业哟");
+                }
                 break;
         }
     }

@@ -1,8 +1,18 @@
 package com.scorpiomiku.cloudclass.adapter;
 
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +27,7 @@ import com.scorpiomiku.cloudclass.utils.DownloadUtils;
 import com.scorpiomiku.cloudclass.utils.MessageUtils;
 
 import java.io.File;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -110,7 +121,7 @@ public class SourceHolder extends RecyclerView.ViewHolder {
                                 File file = new File(Environment.getExternalStorageDirectory().getPath() + "/download/" + fileName);
 
                                 try {
-
+                                    openWPS(file.getPath());
 
                                 } catch (Exception e) {
 
@@ -136,5 +147,39 @@ public class SourceHolder extends RecyclerView.ViewHolder {
                         });
                     }
                 });
+    }
+
+    private void openWPS(String path) {
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(itemView.getContext(),
+                    "com.scorpiomiku.cloudclass.fileprovider",
+                    new File(path));
+            intent.setData(uri);
+            grantUriPermission(itemView.getContext(), uri, intent);
+        } else {
+            uri = Uri.fromFile(new File(path));
+            intent.setData(uri);
+        }
+        intent.putExtras(bundle);
+        try {
+//            itemView.getContext().getApplicationContext().startActivity(Intent.createChooser(intent, "标题"));
+            itemView.getContext().getApplicationContext().startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void grantUriPermission(Context context, Uri fileUri, Intent intent) {
+        List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        for (ResolveInfo resolveInfo : resInfoList) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            context.grantUriPermission(packageName, fileUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
     }
 }
