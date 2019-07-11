@@ -102,7 +102,7 @@ public class SourceHolder extends RecyclerView.ViewHolder {
         dialog.setProgress(0);
         dialog.setMax(100);
         dialog.show();
-
+        MessageUtils.logd(ConstantUtils.mediaHost + mySource.getSource_path());
         DownloadUtils.get().download(itemView.getContext(), ConstantUtils.mediaHost + mySource.getSource_path(),
                 "/download/", mySource.getSource_name(), new DownloadUtils.OnDownloadListener() {
                     @Override
@@ -118,10 +118,10 @@ public class SourceHolder extends RecyclerView.ViewHolder {
                                     return;
                                 }
 
-                                File file = new File(Environment.getExternalStorageDirectory().getPath() + "/download/" + fileName);
+                                File file = new File(Environment.getExternalStorageDirectory().getPath() + "/download/" + mySource.getSource_name());
 
                                 try {
-                                    openWPS(file.getPath());
+                                    openWPS(file);
 
                                 } catch (Exception e) {
 
@@ -163,6 +163,32 @@ public class SourceHolder extends RecyclerView.ViewHolder {
             grantUriPermission(itemView.getContext(), uri, intent);
         } else {
             uri = Uri.fromFile(new File(path));
+            intent.setData(uri);
+        }
+        intent.putExtras(bundle);
+        try {
+//            itemView.getContext().getApplicationContext().startActivity(Intent.createChooser(intent, "标题"));
+            itemView.getContext().getApplicationContext().startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void openWPS(File path) {
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(itemView.getContext(),
+                    "com.scorpiomiku.cloudclass.fileprovider",
+                    path);
+            intent.setData(uri);
+            grantUriPermission(itemView.getContext(), uri, intent);
+        } else {
+            uri = Uri.fromFile(path);
             intent.setData(uri);
         }
         intent.putExtras(bundle);

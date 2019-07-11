@@ -6,7 +6,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -22,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,6 +41,10 @@ public class PowerActivity extends BaseActivity {
     ImageView backButton;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.cover)
+    LinearLayout cover;
     private List<Power> powers = new ArrayList<>();
     private PowerAdapter adapter;
 
@@ -52,6 +58,7 @@ public class PowerActivity extends BaseActivity {
                     case 0:
                         break;
                     default:
+                        cover.setVisibility(View.INVISIBLE);
                         adapter.notifyDataSetChanged();
                         break;
                 }
@@ -71,6 +78,7 @@ public class PowerActivity extends BaseActivity {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         data.put("courseId", CloudClass.course.getCourse_id());
         data.put("time", String.valueOf(hour));
+        cover.setVisibility(View.VISIBLE);
         WebUtils.getPower(data, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

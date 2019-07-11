@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.scorpiomiku.cloudclass.CloudClass;
+import com.scorpiomiku.cloudclass.utils.MessageUtils;
 
 /**
  * Created by ScorpioMiku on 2019/7/4.
@@ -43,9 +44,10 @@ public class PowerService extends Service {
             public void run() {
                 IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
                 registerReceiver(powerReceiver, intentFilter);
-                handler.postDelayed(this, 10000);
+                handler.postDelayed(this, 30000);
+                MessageUtils.logd("test");
             }
         };
-        handler.postDelayed(runnable, 1000);
+        handler.postDelayed(runnable, 3000);
     }
 }

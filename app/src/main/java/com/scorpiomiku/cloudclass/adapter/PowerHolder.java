@@ -3,11 +3,15 @@ package com.scorpiomiku.cloudclass.adapter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -24,8 +28,6 @@ import com.scorpiomiku.cloudclass.utils.WebUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
-
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -47,6 +49,8 @@ public class PowerHolder extends RecyclerView.ViewHolder {
     TextView idCard;
     @BindView(R.id.chart)
     LineChart chart;
+    @BindView(R.id.container)
+    LinearLayout container;
     private Power power;
     private Handler handler;
 
@@ -54,7 +58,7 @@ public class PowerHolder extends RecyclerView.ViewHolder {
     public PowerHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        handler = new android.os.Handler() {
+        handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -66,6 +70,7 @@ public class PowerHolder extends RecyclerView.ViewHolder {
         };
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void bindView(Power power) {
         this.power = power;
         name.setText(power.getStudent_name());
@@ -74,9 +79,14 @@ public class PowerHolder extends RecyclerView.ViewHolder {
         String[] levels = power.getLevel().split(";");
         ArrayList<Entry> pointValues = new ArrayList<>();
         pointValues.add(new Entry(0, 100));
+        ArrayList<Float> data = new ArrayList<>();
         int i;
         for (i = 1; i <= levels.length - 1; i++) {
-            pointValues.add(new Entry(i, Float.valueOf(levels[i]) ));
+            pointValues.add(new Entry(i, Float.valueOf(levels[i])));
+            data.add(Float.valueOf(levels[i]));
+        }
+        if (analysis(data)) {
+            container.setBackgroundColor(itemView.getContext().getColor(R.color.red));
         }
         pointValues.add(new Entry(i, 0));
         ChartMaker.initSingleLineChart(chart, pointValues, "电量情况");
@@ -142,6 +152,19 @@ public class PowerHolder extends RecyclerView.ViewHolder {
         JsonObject jsonObject = (JsonObject) jsonParser.parse(result);
         return jsonObject;
 
+    }
+
+    private boolean analysis(ArrayList<Float> data) {
+        float last = data.get(1);
+        boolean game = false;
+        for (int i = 1; i < data.size(); i += 20) {
+            float now = data.get(i);
+            if (now - last > 5) {
+                game = true;
+            }
+            last = now;
+        }
+        return game;
     }
 
 }

@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
@@ -50,6 +51,7 @@ public class UpFileActivity extends BaseActivity {
     Button upButton;
     @BindView(R.id.cover)
     LinearLayout cover;
+
 
     private String upFileName = "";
     private String filePath;
@@ -196,11 +198,7 @@ public class UpFileActivity extends BaseActivity {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
-//                Log.i(TAG,"isExternalStorageDocument***"+uri.toString());
-//                Log.i(TAG,"docId***"+docId);
-//                以下是打印示例：
-//                isExternalStorageDocument***content://com.android.externalstorage.documents/document/primary%3ATset%2FROC2018421103253.wav
-//                docId***primary:Test/ROC2018421103253.wav
+
                 final String[] split = docId.split(":");
                 final String type = split[0];
 
@@ -212,6 +210,7 @@ public class UpFileActivity extends BaseActivity {
             else if (isDownloadsDocument(uri)) {
 //                Log.i(TAG,"isDownloadsDocument***"+uri.toString());
                 final String id = DocumentsContract.getDocumentId(uri);
+                MessageUtils.logd(id);
                 final Uri contentUri = ContentUris.withAppendedId(
                         Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
